@@ -7,6 +7,7 @@
 
 #include <avr/io.h>
 #include "myFunctionsInclude.h"
+#include <math.h>
 
 int main(void)
 {
@@ -14,6 +15,7 @@ int main(void)
 	CLKPR = 0x00;
 	LCD_Init();
 	//writeChar('6', 5);
-	writeLong(800815);
+	//writeLong(34675);
+	prime();
 }
 

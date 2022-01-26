@@ -4,6 +4,7 @@
 #include <avr/io.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 void LCD_Init(void)
 {
@@ -57,7 +58,7 @@ void writeChar(char ch, int pos)
 		// All the numbers
 		// 0 - 0x1551 - 0x15510000, 1 - 0x0110 - 0x01100000, 2 - 0x1E11 - 0x1E110000, 3 - 0x1B11 - 0x1B110000, 4 - 0x0B50 - 0x0B500000, 5 - 0x1B41 - 0x1B410000, 6 - 0x1F41 - 0x1F410000, 7 - 0x0111 - 0x01110000, 8 - 0x1F51 - 0x1F510000, 9 - 0x0B51 - 0x0B510000
 		
-		if (ch >= 0 || ch <= 9){
+		//if (ch >= 0 || ch <= 9){
 			
 			switch (ch)
 			{
@@ -162,7 +163,7 @@ void writeChar(char ch, int pos)
 				break;
 				
 			}
-		}
+		//}
 	}
 	
 	else{
@@ -176,5 +177,23 @@ void writeLong(long i){
 		i /= 10;
 		writeChar(ch, n);
 	}
+}
+
+void prime(){
+	for(long i = 2; i <= 999; i++){
+		if(is_prime(i)){
+			writeLong(i);
+			
+		}
+	}
+}
+
+int is_prime(long i){
+	for(int n = 2; n < sqrt(i); n++){
+		if(i % n == 0){
+			return(0);
+		}
+	}
+	return(1);
 }
 

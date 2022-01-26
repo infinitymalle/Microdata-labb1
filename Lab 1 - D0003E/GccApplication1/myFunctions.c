@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdbool.h>
 
 void LCD_Init(void)
 {
@@ -103,7 +104,7 @@ void prime(){
 }
 
 int is_prime(long i){
-	for(int n = 2; n < sqrt(i); n++){
+	for(int n = 2; n < i; n++){
 		if(i % n == 0){
 			return(0);
 		}
@@ -111,3 +112,38 @@ int is_prime(long i){
 	return(1);
 }
 
+void blink(){
+	TCCR1B = (1 << CS12);
+	
+	uint16_t clk = 0;
+	uint16_t interval = 8000000/512;
+	int on = 0;
+	bool flag = true;
+	
+	while(1) {
+		if (TCNT1 >= clk && flag) {
+			clk = clk + interval;
+			if (on = 0) {
+				on = 1;
+				// Gör att det blinkar
+				LCDDR0 = 0x7;
+				
+			}
+			
+			else {
+				on = 0;
+				// Gör att det blinkar
+				LCDDR0 = 0x3;
+			}
+		}
+		
+		if (clk >= 0xFFFF) {
+			clk = 0;
+			flag = false;
+		}
+		
+		else{
+			flag = true;
+		}
+	}
+}

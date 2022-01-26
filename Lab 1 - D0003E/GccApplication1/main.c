@@ -15,7 +15,7 @@ int main(void)
 	CLKPR = 0x00;
 	LCD_Init();
 	//writeChar('6', 5);
-	//writeLong(34675);
-	prime();
+	writeLong(1111800815);
+	//prime();
 }
 

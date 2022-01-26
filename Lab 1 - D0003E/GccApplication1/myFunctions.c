@@ -42,128 +42,42 @@ void LCD_Init(void)
 void writeChar(char ch, int pos)
 { 
 	if(pos >= 0 && pos <= 5){
-		int pair = pos / 2;					      // Make sure it's either pair 0,1 - 2,3 or 4,5
-		int lr;								      // left or right
-		
-		if (pos % 2 == 0) {						  // If it's position 0, 2 or 4 - lr = 1
-			lr = 1;	
-		}
-		else{									  // Else - multiply the current section of a number by 16 to get the number in the right position
-			lr = 16;
-		}
-		
-		char lcddr = 0xEC;						  // Register position for LCDDR0 is 0xEC
-		#define lcdReg _SFR_MEM8(lcddr + pair)    // Register position for LCDDR0 + 0,1 or 2 to determine whether it's LCCDR0, LCCDR1 or LCDDR2 we are going to print in
-		
-		// All the numbers
-		// 0 - 0x1551 - 0x15510000, 1 - 0x0110 - 0x01100000, 2 - 0x1E11 - 0x1E110000, 3 - 0x1B11 - 0x1B110000, 4 - 0x0B50 - 0x0B500000, 5 - 0x1B41 - 0x1B410000, 6 - 0x1F41 - 0x1F410000, 7 - 0x0111 - 0x01110000, 8 - 0x1F51 - 0x1F510000, 9 - 0x0B51 - 0x0B510000
-		
-		//if (ch >= 0 || ch <= 9){
+		if (ch >= '0' || ch <= '9'){
 			
-			switch (ch)
-			{
-				case '0':
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x5 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x5 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-				break;
-				
-				case '1':
-					lcdReg = lcdReg + 0x0 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x0 * lr;
-				break;
-				
-				case '2':
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0xE * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-				break;
-				
-				case '3':
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0xB * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-				break;
-				
-				case '4':
-					lcdReg = lcdReg + 0x0 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x5 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0xB * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x0 * lr;
-				break;
-				
-				case '5':
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x4 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0xB * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-				break;
-				
-				case '6':
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x4 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0xF * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-				break;
-				
-				case '7':
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x0 * lr;
-				break;
-				
-				case '8':
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x5 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0xF * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x1 * lr;
-				break;
-				
-				case '9':
-					lcdReg = lcdReg + 0x1 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x5 * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0xB * lr;
-					lcddr += 5;
-					lcdReg = lcdReg + 0x0 * lr;
-				break;
-				
+			int pair = pos / 2;					      // Make sure it's either pair 0,1 - 2,3 or 4,5
+			int lr;								      // left or right
+			
+			char lcddr = 0xEC;						  // Register position for LCDDR0 is 0xEC
+			#define lcdReg _SFR_MEM8(lcddr + pair)    // Register position for LCDDR0 + 0,1 or 2 to determine whether it's LCCDR0, LCCDR1 or LCDDR2 we are going to print in
+		
+			// All the numbers
+			// 0 - 0x1551, 1 - 0x0110, 2 - 0x1E11, 3 - 0x1B11, 4 - 0x0B50, 5 - 0x1B41, 6 - 0x1F41, 7 - 0x0111, 8 - 0x1F51, 9 - 0x0B51
+			uint16_t scc[10] = {0x1551, 0x0110, 0x1E11, 0x1B11, 0x0B50, 0x1B41, 0x1F41, 0x0111, 0x1F51, 0x0B51};
+			
+			// Check if we want 
+			
+			if (pos % 2 == 0){
+				lr = 0xF0;
 			}
-		//}
+		
+			else {
+				lr = 0xF;
+			}
+			
+			uint16_t num = scc[ch - '0'];
+			
+			for (int i = 0; i < 4; i++) {
+				int nibble = num & 0xF;
+				num = num >> 4;
+				
+				if(pos % 2 != 0) {
+					nibble = nibble << 4;
+				}
+				
+				lcdReg = (lcdReg & lr) | nibble;
+				lcddr += 5;
+			}
+		}
 	}
 	
 	else{

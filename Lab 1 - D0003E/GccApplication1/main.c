@@ -18,7 +18,11 @@ int main(void)
 	writeLong(1111800815);
 	//prime();
 	//blink();
+<<<<<<< HEAD
 	//button();
 	//part4();
+=======
+	button();
+>>>>>>> 852b5caa7680a3656aa5d4ad958a6739d0634f1d
 }
 

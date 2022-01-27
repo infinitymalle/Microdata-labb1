@@ -104,12 +104,17 @@ void blink(){
 	uint16_t clk = 0;
 	uint16_t interval = 8000000/256;
 	int on = 0;
+<<<<<<< HEAD
 	bool overflowflag = false;
+=======
+	bool overflowflag = false;  //ska vi använda??
+>>>>>>> 852b5caa7680a3656aa5d4ad958a6739d0634f1d
 	
 	while(1){
 		if(TCNT1 == clk && !overflowflag){
 			clk = TCNT1 + interval;
 			if(on == 0){
+<<<<<<< HEAD
 				LCDDR3 = 0x1;
 				on = 1;
 				}else{
@@ -212,6 +217,41 @@ void part4() {
 			else if (PINB >> 7 == 1){
 				buttonPushed = false;
 			}
+=======
+				LCDDR0 = 0x2;
+				on = 1;
+			}else{
+				LCDDR0 = 0x0;
+				on = 0;
+			}
+		}
+			
+		if (TCNT1 < 0xFFFF){
+				overflowflag = false;
+		}else{
+			overflowflag = true;
+			
+			clk = TCNT1 + interval;
+		}
+	}
+}
+
+void button(){
+	
+	PORTB = (1 << PB7);//0b10000000;
+	
+	LCDDR8 = 0x1;
+	LCDDR13 = 0x0;
+	//bool pressingflag = false;
+	
+	while(1){
+		if(PINB7 == 0x0){
+			LCDDR13 = 0x0;
+			//pressingflag = true;
+			
+		}else{
+			LCDDR13 = 0x1;
+>>>>>>> 852b5caa7680a3656aa5d4ad958a6739d0634f1d
 		}
 	}
 }

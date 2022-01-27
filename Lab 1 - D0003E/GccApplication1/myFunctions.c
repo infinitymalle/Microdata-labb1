@@ -116,34 +116,47 @@ void blink(){
 	TCCR1B = (1 << CS12);
 	
 	uint16_t clk = 0;
-	uint16_t interval = 8000000/512;
+	uint16_t interval = 8000000/256;
 	int on = 0;
-	bool flag = true;
+	bool overflowflag = false;  //ska vi använda??
 	
-	while(1) {
-		if (TCNT1 >= clk && flag) {
-			clk = clk + interval;
-			if (on = 0) {
+	while(1){
+		if(TCNT1 == clk && !overflowflag){
+			clk = TCNT1 + interval;
+			if(on == 0){
+				LCDDR0 = 0x2;
 				on = 1;
-				// Gör att det blinkar
-				LCDDR0 = 0x7;
-				
-			}
-			
-			else {
+			}else{
+				LCDDR0 = 0x0;
 				on = 0;
-				// Gör att det blinkar
-				LCDDR0 = 0x3;
 			}
 		}
-		
-		if (clk >= 0xFFFF) {
-			clk = 0;
-			flag = false;
+			
+		if (TCNT1 < 0xFFFF){
+				overflowflag = false;
+		}else{
+			overflowflag = true;
+			
+			clk = TCNT1 + interval;
 		}
-		
-		else{
-			flag = true;
+	}
+}
+
+void button(){
+	
+	PORTB = (1 << PB7);//0b10000000;
+	
+	LCDDR8 = 0x1;
+	LCDDR13 = 0x0;
+	//bool pressingflag = false;
+	
+	while(1){
+		if(PINB7 == 0x0){
+			LCDDR13 = 0x0;
+			//pressingflag = true;
+			
+		}else{
+			LCDDR13 = 0x1;
 		}
 	}
 }

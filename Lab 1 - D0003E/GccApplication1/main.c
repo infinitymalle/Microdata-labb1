@@ -17,6 +17,7 @@ int main(void)
 	//writeChar('6', 0);
 	//writeLong(1111800815);
 	//prime();
-	blink();
+	//blink();
+	button();
 }
 

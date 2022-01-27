@@ -42,41 +42,27 @@ void LCD_Init(void)
 
 void writeChar(char ch, int pos)
 { 
+	// All the numbers
+	// 0 - 0x1551, 1 - 0x0110, 2 - 0x1E11, 3 - 0x1B11, 4 - 0x0B50, 5 - 0x1B41, 6 - 0x1F41, 7 - 0x0111, 8 - 0x1F51, 9 - 0x0B51
+	uint16_t scc[] = {0x1551, 0x0110, 0x1E11, 0x1B11, 0x0B50, 0x1B41, 0x1F41, 0x0111, 0x1F51, 0x0B51};
+		
 	if(pos >= 0 && pos <= 5){
 		if (ch >= '0' || ch <= '9'){
 			
 			int pair = pos / 2;					      // Make sure it's either pair 0,1 - 2,3 or 4,5
-			int lr;								      // left or right
+			uint8_t *lcddr = (uint8_t *) 0xEC + pair; // Point to register position 0xEC which isLCDDR0 and add pair to get LCDDR0, LCDDR1 or LCDDR2 				      
+			uint16_t num = scc[ch - '0'];			  // Get the hexadecimal number from the list
 			
-			char lcddr = 0xEC;						  // Register position for LCDDR0 is 0xEC
-			#define lcdReg _SFR_MEM8(lcddr + pair)    // Register position for LCDDR0 + 0,1 or 2 to determine whether it's LCCDR0, LCCDR1 or LCDDR2 we are going to print in
-		
-			// All the numbers
-			// 0 - 0x1551, 1 - 0x0110, 2 - 0x1E11, 3 - 0x1B11, 4 - 0x0B50, 5 - 0x1B41, 6 - 0x1F41, 7 - 0x0111, 8 - 0x1F51, 9 - 0x0B51
-			uint16_t scc[10] = {0x1551, 0x0110, 0x1E11, 0x1B11, 0x0B50, 0x1B41, 0x1F41, 0x0111, 0x1F51, 0x0B51};
-			
-			// Check if we want 
-			
-			if (pos % 2 == 0){
-				lr = 0xF0;
-			}
-		
-			else {
-				lr = 0xF;
-			}
-			
-			uint16_t num = scc[ch - '0'];
-			
-			for (int i = 0; i < 4; i++) {
-				int nibble = num & 0xF;
-				num = num >> 4;
+			for (int i = 0; i <= 3; i++) {			  // Loop through every number in the hexadecimal number
+				int nibble = num & 0xF;				  // Get the least significant number in the hex
 				
-				if(pos % 2 != 0) {
-					nibble = nibble << 4;
+				if(pos % 2 == 1) {				      // Check if the nibble parts should be in the left or right number in the pair
+					nibble *= 0x10;
 				}
 				
-				lcdReg = (lcdReg & lr) | nibble;
-				lcddr += 5;
+				*lcddr = *lcddr | nibble;			  // Write the nibble to the digit
+				lcddr += 5;							  // Go to LCDDRx + 5
+				num /= 0x10;						  // Next nibble
 			}
 		}
 	}
@@ -116,34 +102,116 @@ void blink(){
 	TCCR1B = (1 << CS12);
 	
 	uint16_t clk = 0;
-	uint16_t interval = 8000000/512;
+	uint16_t interval = 8000000/256;
 	int on = 0;
-	bool flag = true;
+	bool overflowflag = false;
 	
-	while(1) {
-		if (TCNT1 >= clk && flag) {
-			clk = clk + interval;
-			if (on = 0) {
+	while(1){
+		if(TCNT1 == clk && !overflowflag){
+			clk = TCNT1 + interval;
+			if(on == 0){
+				LCDDR3 = 0x1;
 				on = 1;
-				// Gör att det blinkar
-				LCDDR0 = 0x7;
+				}else{
+				LCDDR3 = 0x0;
+				on = 0;
+			}
+		}
+		
+		if (TCNT1 < 0xFFFF){
+			overflowflag = false;
+			}else{
+			overflowflag = true;
+			
+			clk = TCNT1 + interval;
+		}
+	}
+}
+
+void button(){
+	PORTB = 0x80;   //0b10000000
+	LCDDR8 = 1;
+	LCDDR13 = 0;
+	
+	bool buttonPushed = false;
+	
+	while(1){
+		if (PINB >> 7 == 0 && !buttonPushed && LCDDR13 == 0x1){
+			buttonPushed = true;
+			LCDDR13 = 0;
+			LCDDR8 = 1;
+		}
+		
+		else if (PINB >> 7 == 0 && !buttonPushed && LCDDR8 == 0x1) {
+			buttonPushed = true;
+			LCDDR13 = 1;
+			LCDDR8 = 0;
+		}
+		
+		else if (PINB >> 7 == 1){
+			buttonPushed = false;
+		}
+	}
+}
+
+void part4() {
+	
+	PORTB = 0x80;   //0b10000000
+	LCDDR8 = 1;
+	LCDDR13 = 0;
+	TCCR1B = (1 << CS12);
+	
+	uint16_t clk = 0;
+	uint16_t interval = 1000000/256;
+	int on = 0;
+	bool overflowflag = false;
+	bool buttonPushed = false;
+	
+	while(1){
+		for(long i = 25000; i <= 30000; i++){
+			if(is_prime(i)){
+				writeLong(i);
 				
 			}
 			
-			else {
-				on = 0;
-				// Gör att det blinkar
-				LCDDR0 = 0x3;
+			if(TCNT1 >= clk && !overflowflag){
+				clk = TCNT1 + interval;
+				if(on == 0){
+					LCDDR3 = 0x1;
+					on = 1;
+				}
+				
+				else{
+					LCDDR3 = 0x0;
+					on = 0;
+				}
 			}
-		}
 		
-		if (clk >= 0xFFFF) {
-			clk = 0;
-			flag = false;
-		}
+			if (TCNT1 < 0xFFFF){
+				overflowflag = false;
+			}
+			
+			else{
+				overflowflag = true;
+			
+				clk = TCNT1 + interval;
+			}
+	
+			if (PINB >> 7 == 0 && !buttonPushed && LCDDR13 == 0x1){
+				buttonPushed = true;
+				LCDDR13 = 0;
+				LCDDR8 = 1;
+			}
 		
-		else{
-			flag = true;
+			else if (PINB >> 7 == 0 && !buttonPushed && LCDDR8 == 0x1) {
+				buttonPushed = true;
+				LCDDR13 = 1;
+				LCDDR8 = 0;
+			}
+		
+			else if (PINB >> 7 == 1){
+				buttonPushed = false;
+			}
 		}
 	}
 }

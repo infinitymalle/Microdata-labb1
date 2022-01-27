@@ -50,7 +50,7 @@ void writeChar(char ch, int pos)
 		if (ch >= '0' || ch <= '9'){
 			
 			int pair = pos / 2;					      // Make sure it's either pair 0,1 - 2,3 or 4,5
-			uint8_t *lcddr = (uint8_t *) 0xEC + pair; // Point to register position 0xEC which isLCDDR0 and add pair to get LCDDR0, LCDDR1 or LCDDR2 				      
+			uint8_t *lcddr = (uint8_t *) 0xEC + pair; // Point to register position 0xEC which is LCDDR0 and add pair to get LCDDR0, LCDDR1 or LCDDR2 				      
 			uint16_t num = scc[ch - '0'];			  // Get the hexadecimal number from the list
 			
 			for (int i = 0; i <= 3; i++) {			  // Loop through every number in the hexadecimal number
@@ -104,17 +104,12 @@ void blink(){
 	uint16_t clk = 0;
 	uint16_t interval = 8000000/256;
 	int on = 0;
-<<<<<<< HEAD
 	bool overflowflag = false;
-=======
-	bool overflowflag = false;  //ska vi använda??
->>>>>>> 852b5caa7680a3656aa5d4ad958a6739d0634f1d
 	
 	while(1){
 		if(TCNT1 == clk && !overflowflag){
 			clk = TCNT1 + interval;
 			if(on == 0){
-<<<<<<< HEAD
 				LCDDR3 = 0x1;
 				on = 1;
 				}else{
@@ -217,41 +212,6 @@ void part4() {
 			else if (PINB >> 7 == 1){
 				buttonPushed = false;
 			}
-=======
-				LCDDR0 = 0x2;
-				on = 1;
-			}else{
-				LCDDR0 = 0x0;
-				on = 0;
-			}
-		}
-			
-		if (TCNT1 < 0xFFFF){
-				overflowflag = false;
-		}else{
-			overflowflag = true;
-			
-			clk = TCNT1 + interval;
-		}
-	}
-}
-
-void button(){
-	
-	PORTB = (1 << PB7);//0b10000000;
-	
-	LCDDR8 = 0x1;
-	LCDDR13 = 0x0;
-	//bool pressingflag = false;
-	
-	while(1){
-		if(PINB7 == 0x0){
-			LCDDR13 = 0x0;
-			//pressingflag = true;
-			
-		}else{
-			LCDDR13 = 0x1;
->>>>>>> 852b5caa7680a3656aa5d4ad958a6739d0634f1d
 		}
 	}
 }

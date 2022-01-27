@@ -48,16 +48,21 @@ void writeChar(char ch, int pos)
 		
 	if(pos >= 0 && pos <= 5){
 		if (ch >= '0' || ch <= '9'){
-			
+			int lr;
 			int pair = pos / 2;					      // Make sure it's either pair 0,1 - 2,3 or 4,5
-			uint8_t *lcddr = (uint8_t *) 0xEC + pair; // Point to register position 0xEC which is LCDDR0 and add pair to get LCDDR0, LCDDR1 or LCDDR2 				      
+			uint8_t *lcddr = (uint8_t *) 0xEC + pair; // Point to register position 0xEC which is LCDDR0 and add pair to get LCDDR0, LCDDR1 or LCDDR2
 			uint16_t num = scc[ch - '0'];			  // Get the hexadecimal number from the list
-			
+
 			for (int i = 0; i <= 3; i++) {			  // Loop through every number in the hexadecimal number
 				int nibble = num & 0xF;				  // Get the least significant number in the hex
 				
 				if(pos % 2 == 1) {				      // Check if the nibble parts should be in the left or right number in the pair
-					nibble *= 0x10;
+					nibble *= 0x10;					  // If pos % 2 == 1 -> nibble will load in right digit
+					*lcddr = *lcddr & 0xF;			 
+				}
+				
+				else {
+					*lcddr = *lcddr & 0xF0;
 				}
 				
 				*lcddr = *lcddr | nibble;			  // Write the nibble to the digit
@@ -65,10 +70,6 @@ void writeChar(char ch, int pos)
 				num /= 0x10;						  // Next nibble
 			}
 		}
-	}
-	
-	else{
-		return;
 	}
 }
 
@@ -81,7 +82,7 @@ void writeLong(long i){
 }
 
 void prime(){
-	for(long i = 2; i <= 999; i++){
+	for(long i = 2; i <= 5000; i++){
 		if(is_prime(i)){
 			writeLong(i);
 			
@@ -168,7 +169,7 @@ void part4() {
 	bool buttonPushed = false;
 	
 	while(1){
-		for(long i = 25000; i <= 30000; i++){
+		for(long i = 2; i <= 30000; i++){
 			if(is_prime(i)){
 				writeLong(i);
 				

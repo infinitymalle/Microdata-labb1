@@ -7,10 +7,9 @@
 #define ENABLE()        sei()
 #define STACKSIZE       80
 #define NTHREADS        4
-#define SETSTACK(buf,a) *((unsigned int *)(buf)+8) = (unsigned int)(a) + STACKSIZE
-- 4; \
-*((unsigned int *)(buf)+9) = (unsigned int)(a) + STACKSIZE
-- 4
+#define SETSTACK(buf,a) *((unsigned int *)(buf)+8) = (unsigned int)(a) + STACKSIZE - 4; 
+*((unsigned int *)(buf)+9) = (unsigned int)(a) + STACKSIZE - 4;
+
 struct thread_block {
 	void (*function)(int);   // code to run
 	int arg;                 // argument to the above

@@ -14,8 +14,8 @@ int main(void)
     CLKPR = 0x80;
 	CLKPR = 0x00;
 	LCD_Init();
-	//writeChar('6', 3);
-	//writeLong(1111800815);
+	//writeChar('4', 3);
+	//writeLong(123456789);
 	//prime();
 	//blink();
 	//button();

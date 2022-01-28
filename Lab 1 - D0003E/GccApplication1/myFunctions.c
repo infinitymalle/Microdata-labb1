@@ -103,7 +103,7 @@ void blink(){
 	TCCR1B = (1 << CS12);
 	
 	uint16_t clk = 0;
-	uint16_t interval = 8000000/256;
+	uint16_t interval = 8000000/512;
 	int on = 0;
 	bool overflowflag = false;
 	
@@ -119,13 +119,13 @@ void blink(){
 			}
 		}
 		
-		if (TCNT1 < 0xFFFF){
+	/*	if (TCNT1 < 0xFFFF){
 			overflowflag = false;
 			}else{
 			overflowflag = true;
 			
 			clk = TCNT1 + interval;
-		}
+		}*/
 	}
 }
 
@@ -163,13 +163,13 @@ void part4() {
 	TCCR1B = (1 << CS12);
 	
 	uint16_t clk = 0;
-	uint16_t interval = 1000000/256;
+	uint16_t interval = 8000000/256;
 	int on = 0;
 	bool overflowflag = false;
 	bool buttonPushed = false;
 	
 	while(1){
-		for(long i = 2; i <= 30000; i++){
+		for(long i = 25000; i <= 30000; i++){
 			if(is_prime(i)){
 				writeLong(i);
 				

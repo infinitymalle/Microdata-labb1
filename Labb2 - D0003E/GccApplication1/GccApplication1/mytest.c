@@ -1,25 +1,74 @@
 #include "tinythreads.h"
 #include <stdbool.h>
+#include <avr/io.h>
+
 void writeChar(char ch, int pos); // from lab 1
 bool is_prime(long i); // from lab 1
+
+void LCD_Init(void)
+{
+	/*
+		LCD Control and Status Register:
+		LCDCS    - Asynchronous clock source
+		LCDMUX's - Duty = 1/4, Bias = 1/3
+		LCDPM's  - Number of Segments = 25
+	*/
+	
+	LCDCRB = (1 << LCDCS) | (1 << LCDMUX1) | (1 << LCDMUX0) | (1 << LCDPM2) | (1 << LCDPM1) | (1 << LCDPM0);
+	
+	/*
+		LCD Frame Rate Register:
+		LCDCD's - Prescaler setting N = 16
+	*/
+	
+	LCDFRR = (1 << LCDCD2) | (1 << LCDCD1) | (1 << LCDCD0);
+	
+	/*
+		LCD Contrast Control Register
+		None of the LCDDC's used = 300 microseconds
+		LCDCC's = 3,35V
+	*/
+	
+	LCDCCR = (1 << LCDCC3) | (1 << LCDCC2) | (1 << LCDCC1) | (1 << LCDCC0);
+	
+	/*
+		LCDEN = LCD Enabled
+		LCDAB = Low Power Waveform
+	*/
+	LCDCRA = (1 << LCDEN) | (1 << LCDAB);
+	/*
+	
+	
+	*/
+	//PCMSK1 = 0x80;
+	//EIMSK = 0x80;
+	//PORTB = 0x80;
+}
+	
 void printAt(long num, int pos) {
-	int pp = pos;
-	writeChar( (num % 100) / 10 + '0', pp);
-	pp++;
-	writeChar( num % 10 + '0', pp);
+    int pp = pos;
+    writeChar( (num % 100) / 10 + '0', pp);
+    pp++;
+    writeChar( num % 10 + '0', pp);
+	//yield();
 }
+
 void computePrimes(int pos) {
-	long n;
-	for(n = 1; ; n++) {
-		if (is_prime(n)) {
-			printAt(n, pos);
-		}
-	}
+    long n;
+
+    for(n = 1; ; n++) {
+        if (is_prime(n)) {
+            printAt(n, pos);
+        }
+    }
 }
+
 int main() {
-	spawn(computePrimes, 0);
-	computePrimes(3);
+	LCD_Init();
+    spawn(computePrimes, 0);
+    computePrimes(3);
 }
+
 void writeChar(char ch, int pos)
 {
 	// All the numbers
@@ -52,11 +101,11 @@ void writeChar(char ch, int pos)
 		}
 	}
 }
-int is_prime(long i){
+bool is_prime(long i){
 	for(int n = 2; n < i; n++){
 		if(i % n == 0){
-			return(0);
+			return(false);
 		}
 	}
-	return(1);
+	return(true);
 }

@@ -36,13 +36,6 @@ void LCD_Init(void)
 		LCDAB = Low Power Waveform
 	*/
 	LCDCRA = (1 << LCDEN) | (1 << LCDAB);
-	/*
-	
-	
-	*/
-	//PCMSK1 = 0x80;
-	//EIMSK = 0x80;
-	//PORTB = 0x80;
 }
 	
 void printAt(long num, int pos) {
@@ -50,7 +43,7 @@ void printAt(long num, int pos) {
     writeChar( (num % 100) / 10 + '0', pp);
     pp++;
     writeChar( num % 10 + '0', pp);
-	//yield();
+	yield();
 }
 
 void computePrimes(int pos) {
@@ -64,6 +57,8 @@ void computePrimes(int pos) {
 }
 
 int main() {
+	CLKPR = 0x80;
+	CLKPR = 0x00;
 	LCD_Init();
     spawn(computePrimes, 0);
     computePrimes(3);

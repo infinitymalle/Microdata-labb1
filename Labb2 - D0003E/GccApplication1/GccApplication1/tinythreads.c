@@ -35,18 +35,37 @@ static void initialize(void) {
         threads[i].next = &threads[i+1];
     threads[NTHREADS-1].next = NULL;
 
-
     initialized = 1;
+	
+	/*
+		Interrupts are enabled on the 7th pin of PORTB
+	*/
 	PCMSK1 = (PCINT15 >> 1);
 	EIMSK = (PCIE1 >> 1);
-	PORTB = (PB7 >> 1) | (PB4 >> 1) ;
+	
+	/*
+		Enables Joystick
+	*/
+	PORTB = (PB7 >> 1) | (PB4 >> 1);
+	
+	/*
+		Sets OC1A to compare match
+		Sets timer to CTC mode
+	*/
 	TCCR1A = (COM1A1 >> 1) | (COM1A0 >> 1);
 	TCCR1B = (WGM12 >> 1) | (CS12 >> 1) | (CS10 >> 1);
+	
+	/*
+		Timer compare A match interrupt: Enabled
+	*/
 	TIMSK1 = (OCIE1A >> 1);
 	
-	OCR1A = 8000000/(1024);
+	/*
+		8MHz/(1024*20) = 50ms
+		Set TCNT1 = 0
+	*/
+	OCR1A = 8000000/(1024 * 20);
 	TCNT1 = 0x0;
-	
 }
 
 static void enqueue(thread p, thread *queue) {
@@ -102,16 +121,24 @@ void spawn(void (* function)(int), int arg) {
     ENABLE();
 }
 
+// Interrupt handler for button
 ISR(PCINT1_vect) {
-	if(!(PINB >> 7)){
+	if (PINB >> 7 == 0) {
 		yield();
 	}
 }
 
+// Should be interrupt handler for sequential interrupts
+ISR(TIMER1_COMPA_vect) {
+	yield();
+}
+
+// Change thread
 void yield(void) {
-	
+	ENABLE();
 	enqueue(current, &readyQ);
 	dispatch(dequeue(&readyQ));
+	DISABLE();
 }
 
 void lock(mutex *m) {

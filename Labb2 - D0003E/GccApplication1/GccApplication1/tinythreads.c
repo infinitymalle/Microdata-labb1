@@ -40,25 +40,25 @@ static void initialize(void) {
 	/*
 		Interrupts are enabled on the 7th pin of PORTB
 	*/
-	PCMSK1 = (PCINT15 >> 1);
-	EIMSK = (PCIE1 >> 1);
+	PCMSK1 = (1 << PCINT15);
+	EIMSK = (1 << PCIE1);
 	
 	/*
 		Enables Joystick
 	*/
-	PORTB = (PB7 >> 1) | (PB4 >> 1);
+	PORTB = (1 << PB7) | (1 << PB4);
 	
 	/*
 		Sets OC1A to compare match
 		Sets timer to CTC mode
 	*/
-	TCCR1A = (COM1A1 >> 1) | (COM1A0 >> 1);
-	TCCR1B = (WGM12 >> 1) | (CS12 >> 1) | (CS10 >> 1);
+	TCCR1A = (1 << COM1A1) | (1 << COM1A0);
+	TCCR1B = (1 << WGM12) | (1 << CS12) | (1 << CS10);
 	
 	/*
 		Timer compare A match interrupt: Enabled
 	*/
-	TIMSK1 = (OCIE1A >> 1);
+	TIMSK1 = (1 << OCIE1A);
 	
 	/*
 		8MHz/(1024*20) = 50ms
@@ -135,16 +135,35 @@ ISR(TIMER1_COMPA_vect) {
 
 // Change thread
 void yield(void) {
-	ENABLE();
+	DISABLE();
 	enqueue(current, &readyQ);
 	dispatch(dequeue(&readyQ));
-	DISABLE();
+	ENABLE();
 }
 
 void lock(mutex *m) {
-
+	DISABLE();
+	if(m->locked == 0){
+		m->locked = 1;
+	}else{
+		enqueue(current, m->waitQ);
+		dispatch(dequeue(&readyQ));
+	}
+	ENABLE();
 }
 
 void unlock(mutex *m) {
-
+	DISABLE();
+	if(m->waitQ != NULL){
+		enqueue(current, &readyQ);
+		dispatch(dequeue(m->waitQ));
+	}else{
+		m->locked = 0;
+	}
+	
+	ENABLE();
 }
+
+
+// If an interrupt were to happen inside enqueue or dispatch, the threads 
+// might be put in the wrong order or a thread might be lost

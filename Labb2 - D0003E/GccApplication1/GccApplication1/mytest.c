@@ -4,7 +4,8 @@
 
 void writeChar(char ch, int pos); // from lab 1
 bool is_prime(long i); // from lab 1
-
+int pp;
+mutex m = MUTEX_INIT;
 void LCD_Init(void)
 {
 	/*
@@ -39,11 +40,15 @@ void LCD_Init(void)
 }
 	
 void printAt(long num, int pos) {
-    int pp = pos;
+	lock(&m);
+    pp = pos;
     writeChar( (num % 100) / 10 + '0', pp);
+	//for(volatile int i = 0; i < 1000; i++){
+	//}
     pp++;
     writeChar( num % 10 + '0', pp);
-	yield();
+	//yield();
+	unlock(&m);
 }
 
 void computePrimes(int pos) {

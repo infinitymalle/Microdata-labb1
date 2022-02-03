@@ -143,21 +143,34 @@ void yield(void) {
 
 void lock(mutex *m) {
 	DISABLE();
+	
+	// If it's unlocked, lock it
 	if(m->locked == 0){
 		m->locked = 1;
-	}else{
-		enqueue(current, m->waitQ);
+	}
+	
+	// Else - put the current thread in the back of the line of the waitQ
+	// and run the first thread in the readyQ
+	else{
+		enqueue(current, &(m->waitQ));
 		dispatch(dequeue(&readyQ));
 	}
 	ENABLE();
 }
 
 void unlock(mutex *m) {
+	
 	DISABLE();
+	
+	// If threads are available in the waitQ, put the current thread in the last position of the readyQ
+	// and run the first thread in the waitQ
 	if(m->waitQ != NULL){
 		enqueue(current, &readyQ);
-		dispatch(dequeue(m->waitQ));
-	}else{
+		dispatch(dequeue(&(m->waitQ)));
+	}
+	
+	// Else - unlock (put the locked flag to 0)
+	else{
 		m->locked = 0;
 	}
 	

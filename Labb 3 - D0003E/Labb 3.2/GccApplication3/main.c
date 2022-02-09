@@ -19,7 +19,7 @@ int main() {
 	CLKPR = 0x00;
 	LCD_Init();
 	spawn(computePrimes, 0);
-	//spawn(computePrimes, 4); // det va finare med 2 st primes
+	//spawn(computePrimes, 4);
 	spawn(button, 3);
 	blink();
 }

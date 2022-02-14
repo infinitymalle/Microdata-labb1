@@ -1,6 +1,7 @@
 #include "tinythreads.h"
 #include <stdbool.h>
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 void LCD_Init(void);
 void printAt(long num, int pos);
@@ -13,15 +14,19 @@ int whatisclock();
 void resetclock();
 
 mutex m = MUTEX_INIT;
+mutex b = MUTEX_INIT;	//blink
+mutex x = MUTEX_INIT;	//button
 
 int main() {
 	CLKPR = 0x80;
 	CLKPR = 0x00;
 	LCD_Init();
-	spawn(computePrimes, 0);
+	lock(&b);
+	lock(&x);
+	spawn(blink, 0);
 	//spawn(computePrimes, 4);
 	spawn(button, 3);
-	blink();
+	computePrimes(0);
 }
 
 void LCD_Init(void)
@@ -55,6 +60,25 @@ void LCD_Init(void)
 		LCDAB = Low Power Waveform
 	*/
 	LCDCRA = (1 << LCDEN) | (1 << LCDAB);
+	
+	/*
+		Sets OC1A to compare match
+		Sets timer to CTC mode
+	*/
+	TCCR1A = (1 << COM1A1) | (1 << COM1A0);
+	TCCR1B = (1 << WGM12) | (1 << CS12) | (1 << CS10);
+	
+	/*
+		Timer compare A match interrupt: Enabled
+	*/
+	TIMSK1 = (1 << OCIE1A);
+	
+	/*
+		8MHz/(1024*20) = 50ms
+		Set TCNT1 = 0
+	*/
+	OCR1A = 8000000/(1024 * 2);
+	TCNT1 = 0x0;
 }
 	
 void printAt(long num, int pos) {
@@ -126,7 +150,7 @@ void blink(){
 	//uint16_t interval = 8000000/512;
 	int on = 0;
 	
-	while(1){
+	lock(&b);
 		if(whatisclock() >= clk){
 			resetclock();
 			if(on == 0){
@@ -137,7 +161,7 @@ void blink(){
 				on = 0;
 			}
 		}
-	}
+	unlock(&b);
 }
 
 void button(){
@@ -147,7 +171,7 @@ void button(){
 	
 	bool buttonPushed = false;
 	
-	while(1){
+	lock(&x);
 		if (PINB >> 7 == 0 && !buttonPushed && LCDDR13 == 0x1){
 			buttonPushed = true;
 			LCDDR13 = 0;
@@ -163,5 +187,18 @@ void button(){
 		else if (PINB >> 7 == 1){
 			buttonPushed = false;
 		}
+	unlock(&x);
+}
+
+// Interrupt handler for button
+ISR(PCINT1_vect) {
+	if (PINB >> 7 == 0) {
+		unlock(&x);
 	}
+}
+
+// Should be interrupt handler for sequential interrupts
+
+ISR(TIMER1_COMPA_vect) {
+	unlock(&b);
 }

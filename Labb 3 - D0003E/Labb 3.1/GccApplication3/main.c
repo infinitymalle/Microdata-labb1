@@ -20,7 +20,7 @@ int main() {
 	LCD_Init();
 	spawn(computePrimes, 0);
 	//spawn(computePrimes, 4); // det va finare med 2 st primes
-	spawn(button, 3);
+	spawn(button, 0);
 	blink();
 }
 
@@ -119,12 +119,13 @@ bool is_prime(long i){
 	return(true);
 }
 
-void blink(){
+void blink(int uselessSpawn){
 	//TCCR1B = (1 << CS12);
 	int clk = 20;
 	//uint16_t clk = 0;
 	//uint16_t interval = 8000000/512;
 	int on = 0;
+	
 	
 	while(1){
 		if(whatisclock() >= clk){
@@ -140,21 +141,24 @@ void blink(){
 	}
 }
 
-void button(){
+void button(int uselessSpawn){
 	PORTB = 0x80;   //0b10000000
 	LCDDR8 = 1;
 	LCDDR13 = 0;
-	
+	int press = 0;
 	bool buttonPushed = false;
 	
 	while(1){
+		printAt(press, 4);
 		if (PINB >> 7 == 0 && !buttonPushed && LCDDR13 == 0x1){
+			press++;
 			buttonPushed = true;
 			LCDDR13 = 0;
 			LCDDR8 = 1;
 		}
 		
 		else if (PINB >> 7 == 0 && !buttonPushed && LCDDR8 == 0x1) {
+			press++;
 			buttonPushed = true;
 			LCDDR13 = 1;
 			LCDDR8 = 0;

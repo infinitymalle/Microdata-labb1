@@ -17,15 +17,20 @@ mutex m = MUTEX_INIT;
 mutex b = MUTEX_INIT;	//blink
 mutex x = MUTEX_INIT;	//button
 
+//globla stuff for part 3
+//blink
+int on = 0;
+
+//button
+int press = 0;
+bool buttonPushed = false;
+
+
 int main() {
 	CLKPR = 0x80;
 	CLKPR = 0x00;
 	LCD_Init();
-	lock(&b);
-	lock(&x);
-	spawn(blink, 0);
 	//spawn(computePrimes, 4);
-	spawn(button, 0);
 	computePrimes(0);
 }
 
@@ -79,6 +84,10 @@ void LCD_Init(void)
 	*/
 	OCR1A = 8000000/(1024 *2);	//change 2 to 20 for jitter, interrupts 10 times faster because the timer doesn't count as long
 	TCNT1 = 0x0;
+	
+	//for button from the start
+	LCDDR8 = 1;
+	LCDDR13 = 0;
 }
 	
 void printAt(long num, int pos) {
@@ -144,65 +153,43 @@ bool is_prime(long i){
 }
 
 void blink(){
-	//TCCR1B = (1 << CS12);
-	//int clk = 20;
-	//uint16_t clk = 0;
-	//uint16_t interval = 8000000/512;
-	int on = 0;
-	while(1){
-		lock(&b);
-		//if(whatisclock() >= clk){
-		//	resetclock();
-			if(on == 0){
-				LCDDR3 = 0x1;
-				on = 1;
-			}
-			
-			else{
-				LCDDR3 = 0x0;
-				on = 0;
-			}
-		//}
+	if(on == 0){
+		LCDDR3 = 0x1;
+		on = 1;
+	}else{
+		LCDDR3 = 0x0;
+		on = 0;
 	}
 }
 
 void button(){
-	PORTB = 0x80;   //0b10000000
-	LCDDR8 = 1;
-	LCDDR13 = 0;
-	int press = 0;
-	bool buttonPushed = false;
-	printAt(press, 4);
 	
-	while(1){
-		lock(&x);
-		printAt(press, 4);
-		if (PINB >> 7 == 0 && !buttonPushed && LCDDR13 == 0x1){
-			press++;
-			buttonPushed = true;
-			LCDDR13 = 0;
-			LCDDR8 = 1;
-		}
-		
-		else if (PINB >> 7 == 0 && !buttonPushed && LCDDR8 == 0x1) {
-			press++;
-			buttonPushed = true;
-			LCDDR13 = 1;
-			LCDDR8 = 0;
-		}
-		
-		else if (PINB >> 7 == 1){
-			buttonPushed = false;
-		}
+	if (PINB >> 7 == 0 && !buttonPushed && LCDDR13 == 0x1){
+		press++;
+		buttonPushed = true;
+		LCDDR13 = 0;
+		LCDDR8 = 1;
 	}
+	
+	else if (PINB >> 7 == 0 && !buttonPushed && LCDDR8 == 0x1) {
+		press++;
+		buttonPushed = true;
+		LCDDR13 = 1;
+		LCDDR8 = 0;
+	}
+	
+	else if (PINB >> 7 == 1){
+		buttonPushed = false;
+	}
+	printAt(press, 4);
 }
 
 // Interrupt handler for button
 ISR(PCINT1_vect) {
-	unlock(&x);
+	spawn(button, 0);
 }
 
 // Interrupt handler for timer
 ISR(TIMER1_COMPA_vect) {
-	unlock(&b);
+	spawn(blink, 0);
 }

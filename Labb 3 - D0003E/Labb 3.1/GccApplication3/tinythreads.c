@@ -27,7 +27,7 @@ thread freeQ   = threads;
 thread readyQ  = NULL;
 thread current = &initp;
 
-int Timer = 0;
+int timer = 0;
 int initialized = 0;
 
 static void initialize(void) {
@@ -124,14 +124,11 @@ void spawn(void (* function)(int), int arg) {
 
 // Interrupt handler for button
 ISR(PCINT1_vect) {
-	if (PINB >> 7 == 0) {
-		yield();
-	}
 }
 
 // Should be interrupt handler for sequential interrupts
 ISR(TIMER1_COMPA_vect) {
-	Timer++;
+	timer++;
 	yield();
 }
 
@@ -178,11 +175,15 @@ void unlock(mutex *m) {
 	
 	ENABLE();
 }
+
 int whatisclock(){
-	return(Timer);
+	return(timer);
 }
+
 void resetclock(){
-	Timer = 0;
+	DISABLE();
+	timer = 0;
+	ENABLE();
 }
 
 

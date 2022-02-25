@@ -30,7 +30,6 @@ int main() {
 	CLKPR = 0x80;
 	CLKPR = 0x00;
 	LCD_Init();
-	//spawn(computePrimes, 4);
 	computePrimes(0);
 }
 
@@ -94,11 +93,8 @@ void printAt(long num, int pos) {
 	lock(&m);
     int pp = pos;
     writeChar( (num % 100) / 10 + '0', pp);
-	//for(volatile int i = 0; i < 1000; i++){
-	//}
     pp++;
     writeChar( num % 10 + '0', pp);
-	//yield();
 	unlock(&m);
 }
 
@@ -153,6 +149,7 @@ bool is_prime(long i){
 }
 
 void blink(){
+	
 	if(on == 0){
 		LCDDR3 = 0x1;
 		on = 1;

@@ -18,8 +18,8 @@ int main() {
 	CLKPR = 0x80;
 	CLKPR = 0x00;
 	LCD_Init();
+	
 	spawn(computePrimes, 0);
-	//spawn(computePrimes, 4); // det va finare med 2 st primes
 	spawn(button, 0);
 	blink();
 }
@@ -56,16 +56,13 @@ void LCD_Init(void)
 	*/
 	LCDCRA = (1 << LCDEN) | (1 << LCDAB);
 }
-	
+
 void printAt(long num, int pos) {
 	lock(&m);
     int pp = pos;
     writeChar( (num % 100) / 10 + '0', pp);
-	//for(volatile int i = 0; i < 1000; i++){
-	//}
     pp++;
     writeChar( num % 10 + '0', pp);
-	//yield();
 	unlock(&m);
 }
 
@@ -120,12 +117,8 @@ bool is_prime(long i){
 }
 
 void blink(int uselessSpawn){
-	//TCCR1B = (1 << CS12);
 	int clk = 20;
-	//uint16_t clk = 0;
-	//uint16_t interval = 8000000/512;
 	int on = 0;
-	
 	
 	while(1){
 		if(whatisclock() >= clk){
@@ -142,7 +135,6 @@ void blink(int uselessSpawn){
 }
 
 void button(int uselessSpawn){
-	PORTB = 0x80;   //0b10000000
 	LCDDR8 = 1;
 	LCDDR13 = 0;
 	int press = 0;

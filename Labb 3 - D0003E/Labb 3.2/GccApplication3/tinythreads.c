@@ -107,14 +107,14 @@ void spawn(void (* function)(int), int arg) {
 	dispatch(newp);
     ENABLE();
 }
-
+/*
 // Change thread
 void yield(void) {
 	DISABLE();
 	enqueue(current, &readyQ);
 	dispatch(dequeue(&readyQ));
 	ENABLE();
-}
+}*/
 
 void lock(mutex *m) {
 	DISABLE();
@@ -151,15 +151,5 @@ void unlock(mutex *m) {
 	
 	ENABLE();
 }
-/*
-int whatisclock(){
-	return(Timer);
-}
-
-void resetclock(){
-	Timer = 0;
-}
-*/
-
 // If an interrupt were to happen inside enqueue or dispatch, the threads 
 // might be put in the wrong order or a thread might be lost

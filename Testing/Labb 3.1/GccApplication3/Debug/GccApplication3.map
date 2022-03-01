@@ -1,15 +1,15 @@
 Archive member included to satisfy reference by file (symbol)
 
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
-                              mytest.o (__divmodsi4)
+                              main.o (__divmodsi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o) (__negsi2)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                              mytest.o (__do_copy_data)
+                              main.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              mytest.o (__do_clear_bss)
+                              main.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o) (__udivmodsi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(setjmp.o)
@@ -19,23 +19,23 @@ Allocating common symbols
 Common symbol       size              file
 
 initp               0x6d              tinythreads.o
-pp                  0x2               mytest.o
 threads             0x1b4             tinythreads.o
 
 Discarded input sections
 
  .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
  .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .text          0x00000000        0x0 mytest.o
- .data          0x00000000        0x0 mytest.o
- .bss           0x00000000        0x0 mytest.o
+ .text          0x00000000        0x0 main.o
+ .data          0x00000000        0x0 main.o
+ .bss           0x00000000        0x0 main.o
  .text.LCD_Init
-                0x00000000       0x1a mytest.o
+                0x00000000       0x1a main.o
  .text.is_prime
-                0x00000000       0x70 mytest.o
+                0x00000000       0x70 main.o
  .text          0x00000000        0x0 tinythreads.o
  .data          0x00000000        0x0 tinythreads.o
  .bss           0x00000000        0x0 tinythreads.o
+ .bss.timer     0x00000000        0x2 tinythreads.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
@@ -146,7 +146,7 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
-LOAD mytest.o
+LOAD main.o
 LOAD tinythreads.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
@@ -257,7 +257,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x734
+.text           0x00000000      0x7f4
  *(.vectors)
  .vectors       0x00000000       0x5c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
                 0x00000000                __vector_default
@@ -340,50 +340,52 @@ END GROUP
                 0x0000009a                . = ALIGN (0x2)
  *(.text.*)
  .text.writeChar
-                0x0000009a       0xa4 mytest.o
+                0x0000009a       0xa4 main.o
                 0x0000009a                writeChar
- .text.printAt  0x0000013e       0x9a mytest.o
+ .text.printAt  0x0000013e       0x82 main.o
                 0x0000013e                printAt
+ .text.button   0x000001c0       0x9c main.o
+                0x000001c0                button
  .text.computePrimes
-                0x000001d8       0x64 mytest.o
-                0x000001d8                computePrimes
+                0x0000025c       0x64 main.o
+                0x0000025c                computePrimes
  .text.startup.main
-                0x0000023c       0x36 mytest.o
-                0x0000023c                main
+                0x000002c0       0x42 main.o
+                0x000002c0                main
  .text.dispatch
-                0x00000272       0x40 tinythreads.o
- .text.spawn    0x000002b2      0x19c tinythreads.o
-                0x000002b2                spawn
- .text.yield    0x0000044e       0x56 tinythreads.o
-                0x0000044e                yield
+                0x00000302       0x40 tinythreads.o
+ .text.spawn    0x00000342      0x1a2 tinythreads.o
+                0x00000342                spawn
+ .text.yield    0x000004e4       0x56 tinythreads.o
+                0x000004e4                yield
  .text.__vector_3
-                0x000004a4       0x4a tinythreads.o
-                0x000004a4                __vector_3
+                0x0000053a       0x74 tinythreads.o
+                0x0000053a                __vector_3
  .text.__vector_7
-                0x000004ee       0x48 tinythreads.o
-                0x000004ee                __vector_7
- .text.lock     0x00000536       0x7c tinythreads.o
-                0x00000536                lock
- .text.unlock   0x000005b2       0x7a tinythreads.o
-                0x000005b2                unlock
+                0x000005ae       0x48 tinythreads.o
+                0x000005ae                __vector_7
+ .text.lock     0x000005f6       0x7c tinythreads.o
+                0x000005f6                lock
+ .text.unlock   0x00000672       0x7a tinythreads.o
+                0x00000672                unlock
  .text.libgcc.div
-                0x0000062c       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
-                0x0000062c                __divmodsi4
+                0x000006ec       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
+                0x000006ec                __divmodsi4
  .text.libgcc.div
-                0x0000065a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
-                0x0000065a                __negsi2
+                0x0000071a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
+                0x0000071a                __negsi2
  .text.libgcc.div
-                0x0000066a       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x0000066a                __udivmodsi4
+                0x0000072a       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x0000072a                __udivmodsi4
  .text.avr-libc
-                0x000006ae       0x82 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(setjmp.o)
-                0x000006ae                setjmp
-                0x000006ee                longjmp
-                0x00000730                . = ALIGN (0x2)
+                0x0000076e       0x82 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(setjmp.o)
+                0x0000076e                setjmp
+                0x000007ae                longjmp
+                0x000007f0                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000730        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000730                _exit
-                0x00000730                exit
+ .fini9         0x000007f0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000007f0                _exit
+                0x000007f0                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -402,11 +404,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000730        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000007f0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000734                _etext = .
+                0x000007f4                _etext = .
 
-.data           0x00800100       0x18 load address 0x00000734
+.data           0x00800100       0x18 load address 0x000007f4
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -416,18 +418,18 @@ END GROUP
                 0x00800102                freeQ
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x00800104       0x14 mytest.o
+ .rodata        0x00800104       0x14 main.o
  *(.rodata*)
  *(.gnu.linkonce.r*)
                 0x00800118                . = ALIGN (0x2)
                 0x00800118                _edata = .
                 0x00800118                PROVIDE (__data_end, .)
 
-.bss            0x00800118      0x22b
+.bss            0x00800118      0x229
                 0x00800118                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.m         0x00800118        0x4 mytest.o
+ .bss.m         0x00800118        0x4 main.o
                 0x00800118                m
  .bss.initialized
                 0x0080011c        0x2 tinythreads.o
@@ -435,20 +437,18 @@ END GROUP
  .bss.readyQ    0x0080011e        0x2 tinythreads.o
                 0x0080011e                readyQ
  *(COMMON)
- COMMON         0x00800120        0x2 mytest.o
-                0x00800120                pp
- COMMON         0x00800122      0x221 tinythreads.o
-                0x00800122                initp
-                0x0080018f                threads
-                0x00800343                PROVIDE (__bss_end, .)
-                0x00000734                __data_load_start = LOADADDR (.data)
-                0x0000074c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800120      0x221 tinythreads.o
+                0x00800120                initp
+                0x0080018d                threads
+                0x00800341                PROVIDE (__bss_end, .)
+                0x000007f4                __data_load_start = LOADADDR (.data)
+                0x0000080c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800343        0x0
+.noinit         0x00800341        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800343                _end = .
+                0x00800341                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -490,7 +490,7 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 mytest.o
+ .comment       0x00000000       0x30 main.o
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 tinythreads.o
 
@@ -514,51 +514,51 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x98
+.debug_aranges  0x00000000       0xa0
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x48 mytest.o
+                0x00000000       0x50 main.o
  .debug_aranges
-                0x00000048       0x50 tinythreads.o
+                0x00000050       0x50 tinythreads.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x11ce
+.debug_info     0x00000000     0x1290
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x7b6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .debug_info    0x000007b6      0x3e9 mytest.o
- .debug_info    0x00000b9f      0x62f tinythreads.o
+ .debug_info    0x000007b6      0x499 main.o
+ .debug_info    0x00000c4f      0x641 tinythreads.o
 
-.debug_abbrev   0x00000000      0xb65
+.debug_abbrev   0x00000000      0xb74
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x74b C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .debug_abbrev  0x0000074b      0x209 mytest.o
- .debug_abbrev  0x00000954      0x211 tinythreads.o
+ .debug_abbrev  0x0000074b      0x218 main.o
+ .debug_abbrev  0x00000963      0x211 tinythreads.o
 
-.debug_line     0x00000000      0x6d0
+.debug_line     0x00000000      0x7c7
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x122 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .debug_line    0x00000122      0x22e mytest.o
- .debug_line    0x00000350      0x380 tinythreads.o
+ .debug_line    0x00000122      0x2f6 main.o
+ .debug_line    0x00000418      0x3af tinythreads.o
 
-.debug_frame    0x00000000      0x22c
+.debug_frame    0x00000000      0x23c
  *(.debug_frame)
- .debug_frame   0x00000000       0xe0 mytest.o
- .debug_frame   0x000000e0      0x14c tinythreads.o
+ .debug_frame   0x00000000       0xf0 main.o
+ .debug_frame   0x000000f0      0x14c tinythreads.o
 
-.debug_str      0x00000000      0x577
+.debug_str      0x00000000      0x593
  *(.debug_str)
  .debug_str     0x00000000      0x2b3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .debug_str     0x000002b3      0x209 mytest.o
-                                0x247 (size before relaxing)
- .debug_str     0x000004bc       0xbb tinythreads.o
-                                0x2b3 (size before relaxing)
+ .debug_str     0x000002b3      0x21f main.o
+                                0x25d (size before relaxing)
+ .debug_str     0x000004d2       0xc1 tinythreads.o
+                                0x2aa (size before relaxing)
 
-.debug_loc      0x00000000      0xaf4
+.debug_loc      0x00000000      0xbd2
  *(.debug_loc)
- .debug_loc     0x00000000      0x441 mytest.o
- .debug_loc     0x00000441      0x6b3 tinythreads.o
+ .debug_loc     0x00000000      0x51f main.o
+ .debug_loc     0x0000051f      0x6b3 tinythreads.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -578,12 +578,12 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x168
+.debug_ranges   0x00000000      0x170
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x98 mytest.o
- .debug_ranges  0x00000098       0xd0 tinythreads.o
+ .debug_ranges  0x00000000       0xa0 main.o
+ .debug_ranges  0x000000a0       0xd0 tinythreads.o
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(GccApplication1.elf elf32-avr)
+OUTPUT(GccApplication3.elf elf32-avr)
 LOAD linker stubs

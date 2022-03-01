@@ -18,9 +18,10 @@ int main() {
 	CLKPR = 0x80;
 	CLKPR = 0x00;
 	LCD_Init();
+	
+	spawn(computePrimes, 0);
 	spawn(button, 0);
-	spawn(computePrimes, 4);
-	computePrimes(2);
+	computePrimes(4);
 }
 
 void LCD_Init(void)
@@ -115,20 +116,30 @@ bool is_prime(long i){
 	return(true);
 }
 
-void button(int poss){
+void button(int uselessSpawn){
+	LCDDR8 = 1;
+	LCDDR13 = 0;
 	int press = 0;
-	int counter = 0;
 	bool buttonPushed = false;
 	
 	while(1){
-		printAt(press, poss);
+		printAt(press, 4);
+		if (PINB >> 7 == 0 && !buttonPushed && LCDDR13 == 0x1){
+			press++;
+			buttonPushed = true;
+			LCDDR13 = 0;
+			LCDDR8 = 1;
+		}
 		
-		if (PINB >> 7 == 0){		//Down
-			counter--;
-		}else if (PINB >> 6 == 0){	//Up
-			counter++;
-		}else if (PINB >> 4 == 0){	//Press in
+		else if (PINB >> 7 == 0 && !buttonPushed && LCDDR8 == 0x1) {
+			press++;
+			buttonPushed = true;
+			LCDDR13 = 1;
+			LCDDR8 = 0;
+		}
 		
+		else if (PINB >> 7 == 1){
+			buttonPushed = false;
 		}
 	}
 }

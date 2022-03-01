@@ -1,45 +1,63 @@
 Archive member included to satisfy reference by file (symbol)
 
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
-                              main.o (__divmodsi4)
+                              Gui.o (__divmodsi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o) (__negsi2)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o (exit)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                              main.o (__do_copy_data)
+                              Gui.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              main.o (__do_clear_bss)
+                              TinyTimber.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o) (__udivmodsi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(setjmp.o)
-                              tinythreads.o (setjmp)
+                              TinyTimber.o (setjmp)
 
 Allocating common symbols
 Common symbol       size              file
 
-initp               0x6d              tinythreads.o
-threads             0x1b4             tinythreads.o
+otable              0x24              TinyTimber.o
+threads             0x74              TinyTimber.o
+mtable              0x24              TinyTimber.o
+thread0             0x1d              TinyTimber.o
+messages            0xf0              TinyTimber.o
+stacks              0x180             TinyTimber.o
 
 Discarded input sections
 
  .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
  .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
+ .text          0x00000000        0x0 Gui.o
+ .data          0x00000000        0x0 Gui.o
+ .bss           0x00000000        0x0 Gui.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text.LCD_Init
-                0x00000000       0x1a main.o
- .text.is_prime
-                0x00000000       0x70 main.o
- .text          0x00000000        0x0 tinythreads.o
- .data          0x00000000        0x0 tinythreads.o
- .bss           0x00000000        0x0 tinythreads.o
- .text.whatisclock
-                0x00000000        0xa tinythreads.o
- .text.resetclock
-                0x00000000        0xe tinythreads.o
- .bss.timer     0x00000000        0x2 tinythreads.o
+ .text          0x00000000        0x0 TinyTimber.o
+ .data          0x00000000        0x0 TinyTimber.o
+ .bss           0x00000000        0x0 TinyTimber.o
+ .text.remove   0x00000000       0x4a TinyTimber.o
+ .text.initialize
+                0x00000000      0x13e TinyTimber.o
+ .text.enqueueByBaseline
+                0x00000000       0x62 TinyTimber.o
+ .text.insert   0x00000000       0x14 TinyTimber.o
+ .text.idle     0x00000000        0xe TinyTimber.o
+ .text.async    0x00000000      0x212 TinyTimber.o
+ .text.sync     0x00000000      0x104 TinyTimber.o
+ .text.run      0x00000000       0xb0 TinyTimber.o
+ .text.ABORT    0x00000000       0x8c TinyTimber.o
+ .text.T_RESET  0x00000000       0x3a TinyTimber.o
+ .text.T_SAMPLE
+                0x00000000       0x54 TinyTimber.o
+ .text.CURRENT_OFFSET
+                0x00000000       0xae TinyTimber.o
+ .text.install  0x00000000       0x36 TinyTimber.o
+ .text.tinytimber
+                0x00000000       0x2e TinyTimber.o
+ .data.msgPool  0x00000000        0x2 TinyTimber.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
@@ -150,8 +168,9 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
+LOAD Gui.o
 LOAD main.o
-LOAD tinythreads.o
+LOAD TinyTimber.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
 END GROUP
@@ -261,7 +280,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x740
+.text           0x00000000     0x16d6
  *(.vectors)
  .vectors       0x00000000       0x5c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
                 0x00000000                __vector_default
@@ -320,76 +339,114 @@ END GROUP
  *(.init9)
  *(.text)
  .text          0x00000096        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
-                0x00000096                __vector_22
-                0x00000096                __vector_1
-                0x00000096                __vector_12
-                0x00000096                __bad_interrupt
                 0x00000096                __vector_6
-                0x00000096                __vector_11
-                0x00000096                __vector_13
-                0x00000096                __vector_17
-                0x00000096                __vector_19
-                0x00000096                __vector_5
-                0x00000096                __vector_4
-                0x00000096                __vector_9
-                0x00000096                __vector_2
-                0x00000096                __vector_21
-                0x00000096                __vector_15
                 0x00000096                __vector_8
-                0x00000096                __vector_14
-                0x00000096                __vector_10
-                0x00000096                __vector_16
-                0x00000096                __vector_18
-                0x00000096                __vector_20
+                0x00000096                __bad_interrupt
                 0x0000009a                . = ALIGN (0x2)
  *(.text.*)
  .text.writeChar
-                0x0000009a       0xa4 main.o
+                0x0000009a       0xcc Gui.o
                 0x0000009a                writeChar
- .text.printAt  0x0000013e       0x82 main.o
-                0x0000013e                printAt
- .text.button   0x000001c0       0x22 main.o
-                0x000001c0                button
- .text.computePrimes
-                0x000001e2       0x64 main.o
-                0x000001e2                computePrimes
- .text.startup.main
-                0x00000246       0x42 main.o
-                0x00000246                main
+ .text.printAt  0x00000166       0x74 Gui.o
+                0x00000166                printAt
+ .text.button   0x000001da       0x7e Gui.o
+                0x000001da                button
+ .text.LCD_Init
+                0x00000258       0x82 Gui.o
+                0x00000258                LCD_Init
+ .text.main     0x000002da       0x14 main.o
+                0x000002da                main
  .text.dispatch
-                0x00000288       0x40 tinythreads.o
- .text.spawn    0x000002c8      0x1a0 tinythreads.o
-                0x000002c8                spawn
- .text.__vector_7
-                0x00000468       0x14 tinythreads.o
-                0x00000468                __vector_7
- .text.yield    0x0000047c       0x56 tinythreads.o
-                0x0000047c                yield
+                0x000002ee       0x40 TinyTimber.o
+ .text.enqueueByDeadline
+                0x0000032e       0x62 TinyTimber.o
+                0x0000032e                enqueueByDeadline
+ .text.dequeue  0x00000390       0x2e TinyTimber.o
+                0x00000390                dequeue
+ .text.push     0x000003be       0x14 TinyTimber.o
+                0x000003be                push
+ .text.pop      0x000003d2       0x14 TinyTimber.o
+                0x000003d2                pop
+ .text.schedule
+                0x000003e6       0x68 TinyTimber.o
+ .text.__vector_1
+                0x0000044e       0xde TinyTimber.o
+                0x0000044e                __vector_1
+ .text.__vector_2
+                0x0000052c       0xde TinyTimber.o
+                0x0000052c                __vector_2
  .text.__vector_3
-                0x000004d2       0x70 tinythreads.o
-                0x000004d2                __vector_3
- .text.lock     0x00000542       0x7c tinythreads.o
-                0x00000542                lock
- .text.unlock   0x000005be       0x7a tinythreads.o
-                0x000005be                unlock
+                0x0000060a       0xde TinyTimber.o
+                0x0000060a                __vector_3
+ .text.__vector_4
+                0x000006e8       0xde TinyTimber.o
+                0x000006e8                __vector_4
+ .text.__vector_5
+                0x000007c6       0xde TinyTimber.o
+                0x000007c6                __vector_5
+ .text.__vector_10
+                0x000008a4       0xde TinyTimber.o
+                0x000008a4                __vector_10
+ .text.__vector_11
+                0x00000982       0xde TinyTimber.o
+                0x00000982                __vector_11
+ .text.__vector_12
+                0x00000a60       0xde TinyTimber.o
+                0x00000a60                __vector_12
+ .text.__vector_13
+                0x00000b3e       0xde TinyTimber.o
+                0x00000b3e                __vector_13
+ .text.__vector_14
+                0x00000c1c       0xde TinyTimber.o
+                0x00000c1c                __vector_14
+ .text.__vector_15
+                0x00000cfa       0xde TinyTimber.o
+                0x00000cfa                __vector_15
+ .text.__vector_16
+                0x00000dd8       0xde TinyTimber.o
+                0x00000dd8                __vector_16
+ .text.__vector_17
+                0x00000eb6       0xde TinyTimber.o
+                0x00000eb6                __vector_17
+ .text.__vector_18
+                0x00000f94       0xde TinyTimber.o
+                0x00000f94                __vector_18
+ .text.__vector_19
+                0x00001072       0xde TinyTimber.o
+                0x00001072                __vector_19
+ .text.__vector_20
+                0x00001150       0xde TinyTimber.o
+                0x00001150                __vector_20
+ .text.__vector_21
+                0x0000122e       0xde TinyTimber.o
+                0x0000122e                __vector_21
+ .text.__vector_22
+                0x0000130c       0xde TinyTimber.o
+                0x0000130c                __vector_22
+ .text.__vector_9
+                0x000013ea       0xa4 TinyTimber.o
+                0x000013ea                __vector_9
+ .text.__vector_7
+                0x0000148e      0x140 TinyTimber.o
+                0x0000148e                __vector_7
  .text.libgcc.div
-                0x00000638       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
-                0x00000638                __divmodsi4
+                0x000015ce       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
+                0x000015ce                __divmodsi4
  .text.libgcc.div
-                0x00000666       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
-                0x00000666                __negsi2
+                0x000015fc       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
+                0x000015fc                __negsi2
  .text.libgcc.div
-                0x00000676       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000676                __udivmodsi4
+                0x0000160c       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x0000160c                __udivmodsi4
  .text.avr-libc
-                0x000006ba       0x82 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(setjmp.o)
-                0x000006ba                setjmp
-                0x000006fa                longjmp
-                0x0000073c                . = ALIGN (0x2)
+                0x00001650       0x82 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(setjmp.o)
+                0x00001650                setjmp
+                0x00001690                longjmp
+                0x000016d2                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000073c        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000073c                _exit
-                0x0000073c                exit
+ .fini9         0x000016d2        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000016d2                _exit
+                0x000016d2                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -408,51 +465,62 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000073c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000016d2        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000740                _etext = .
+                0x000016d6                _etext = .
 
-.data           0x00800100       0x18 load address 0x00000740
+.data           0x00800100       0x1a load address 0x000016d6
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.current  0x00800100        0x2 tinythreads.o
+ .data.current  0x00800100        0x2 TinyTimber.o
                 0x00800100                current
- .data.freeQ    0x00800102        0x2 tinythreads.o
-                0x00800102                freeQ
+ .data.activeStack
+                0x00800102        0x2 TinyTimber.o
+                0x00800102                activeStack
+ .data.threadPool
+                0x00800104        0x2 TinyTimber.o
+                0x00800104                threadPool
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x00800104       0x14 main.o
+ .rodata        0x00800106       0x14 Gui.o
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x00800118                . = ALIGN (0x2)
-                0x00800118                _edata = .
-                0x00800118                PROVIDE (__data_end, .)
+                0x0080011a                . = ALIGN (0x2)
+                0x0080011a                _edata = .
+                0x0080011a                PROVIDE (__data_end, .)
 
-.bss            0x00800118      0x229
-                0x00800118                PROVIDE (__bss_start, .)
+.bss            0x0080011a      0x353
+                0x0080011a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.m         0x00800118        0x4 main.o
-                0x00800118                m
- .bss.initialized
-                0x0080011c        0x2 tinythreads.o
-                0x0080011c                initialized
- .bss.readyQ    0x0080011e        0x2 tinythreads.o
-                0x0080011e                readyQ
+ .bss.overflows
+                0x0080011a        0x2 TinyTimber.o
+                0x0080011a                overflows
+ .bss.timestamp
+                0x0080011c        0x4 TinyTimber.o
+                0x0080011c                timestamp
+ .bss.timerQ    0x00800120        0x2 TinyTimber.o
+                0x00800120                timerQ
+ .bss.msgQ      0x00800122        0x2 TinyTimber.o
+                0x00800122                msgQ
  *(COMMON)
- COMMON         0x00800120      0x221 tinythreads.o
-                0x00800120                initp
-                0x0080018d                threads
-                0x00800341                PROVIDE (__bss_end, .)
-                0x00000740                __data_load_start = LOADADDR (.data)
-                0x00000758                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800124      0x349 TinyTimber.o
+                0x00800124                otable
+                0x00800148                threads
+                0x008001bc                mtable
+                0x008001e0                thread0
+                0x008001fd                messages
+                0x008002ed                stacks
+                0x0080046d                PROVIDE (__bss_end, .)
+                0x000016d6                __data_load_start = LOADADDR (.data)
+                0x000016f0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800341        0x0
+.noinit         0x0080046d        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800341                _end = .
+                0x0080046d                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -494,9 +562,10 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 main.o
+ .comment       0x00000000       0x30 Gui.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 tinythreads.o
+ .comment       0x00000030       0x31 main.o
+ .comment       0x00000030       0x31 TinyTimber.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -518,51 +587,59 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xb0
+.debug_aranges  0x00000000      0x1b0
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x50 main.o
+                0x00000000       0x38 Gui.o
  .debug_aranges
-                0x00000050       0x60 tinythreads.o
+                0x00000038       0x20 main.o
+ .debug_aranges
+                0x00000058      0x158 TinyTimber.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x129e
+.debug_info     0x00000000     0x1c96
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x7b6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .debug_info    0x000007b6      0x475 main.o
- .debug_info    0x00000c2b      0x673 tinythreads.o
+ .debug_info    0x000007b6      0x2c6 Gui.o
+ .debug_info    0x00000a7c       0xa2 main.o
+ .debug_info    0x00000b1e     0x1178 TinyTimber.o
 
-.debug_abbrev   0x00000000      0xbd6
+.debug_abbrev   0x00000000      0xc7d
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x74b C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .debug_abbrev  0x0000074b      0x234 main.o
- .debug_abbrev  0x0000097f      0x257 tinythreads.o
+ .debug_abbrev  0x0000074b      0x128 Gui.o
+ .debug_abbrev  0x00000873       0x72 main.o
+ .debug_abbrev  0x000008e5      0x398 TinyTimber.o
 
-.debug_line     0x00000000      0x750
+.debug_line     0x00000000     0x11fe
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x122 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .debug_line    0x00000122      0x250 main.o
- .debug_line    0x00000372      0x3de tinythreads.o
+ .debug_line    0x00000122      0x27d Gui.o
+ .debug_line    0x0000039f       0xba main.o
+ .debug_line    0x00000459      0xda5 TinyTimber.o
 
-.debug_frame    0x00000000      0x220
+.debug_frame    0x00000000      0xa9c
  *(.debug_frame)
- .debug_frame   0x00000000       0xf0 main.o
- .debug_frame   0x000000f0      0x130 tinythreads.o
+ .debug_frame   0x00000000       0xa8 Gui.o
+ .debug_frame   0x000000a8       0x24 main.o
+ .debug_frame   0x000000cc      0x9d0 TinyTimber.o
 
-.debug_str      0x00000000      0x5a1
+.debug_str      0x00000000      0x84d
  *(.debug_str)
  .debug_str     0x00000000      0x2b3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
- .debug_str     0x000002b3      0x216 main.o
-                                0x254 (size before relaxing)
- .debug_str     0x000004c9       0xd8 tinythreads.o
-                                0x2b8 (size before relaxing)
+ .debug_str     0x000002b3      0x1a5 Gui.o
+                                0x1de (size before relaxing)
+ .debug_str     0x00000458       0x11 main.o
+                                0x18f (size before relaxing)
+ .debug_str     0x00000469      0x3e4 TinyTimber.o
+                                0x583 (size before relaxing)
 
-.debug_loc      0x00000000      0xad2
+.debug_loc      0x00000000     0x215f
  *(.debug_loc)
- .debug_loc     0x00000000      0x4bb main.o
- .debug_loc     0x000004bb      0x617 tinythreads.o
+ .debug_loc     0x00000000      0x2f3 Gui.o
+ .debug_loc     0x000002f3     0x1e6c TinyTimber.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -584,10 +661,11 @@ END GROUP
 
 .debug_ranges   0x00000000      0x180
  *(.debug_ranges)
- .debug_ranges  0x00000000       0xa0 main.o
- .debug_ranges  0x000000a0       0xe0 tinythreads.o
+ .debug_ranges  0x00000000       0x28 Gui.o
+ .debug_ranges  0x00000028       0x10 main.o
+ .debug_ranges  0x00000038      0x148 TinyTimber.o
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(GccApplication3.elf elf32-avr)
+OUTPUT(Labb 4.elf elf32-avr)
 LOAD linker stubs

@@ -41,14 +41,15 @@ static void initialize(void) {
 	/*
 		Interrupts are enabled on the 7th pin of PORTB
 	*/
-	PCMSK1 = (1 << PCINT15);
-	EIMSK = (1 << PCIE1);
+	PCMSK1 = (1 << PCINT15) | (1 << PCINT14) | (1 << PCINT12);
+	PCMSK0 = (1 << PCINT3) | (1 << PCINT2);
+	EIMSK = (1 << PCIE1) | (1 << PCIE0);
 	
 	/*
 		Enables Joystick
 	*/
-	PORTB = (1 << PB7) | (1 << PB4) | (1 << PB6);
-	PORTE = (1 << PE2) | (1 << PB3);
+	PORTB = (1 << PB7) | (1 << PB4);
+	
 	/*
 		Sets OC1A to compare match
 		Sets timer to CTC mode
@@ -124,21 +125,14 @@ void spawn(void (* function)(int), int arg) {
 
 // Interrupt handler for button
 ISR(PCINT1_vect) {
-	yield();
-	if (PINE >> 2 == 0){	//Left
-		LCDDR8 = 1;
+	if ((PINB >> 7 == 0) || (PINB >> 6 == 0) || (PINB >> 4 == 0) || (PINE >> 2 == 0) || (PINE >> 3 == 0)){
 		yield();
-		
-	}else if (PINE >> 3 == 0){	//Right
-		LCDDR13 = 0;
-		yield();
-		
 	}
 }
 
 // Should be interrupt handler for sequential interrupts
 ISR(TIMER1_COMPA_vect) {
-	//yield();
+	yield();
 }
 
 // Change thread
@@ -185,15 +179,6 @@ void unlock(mutex *m) {
 	ENABLE();
 }
 
-int whatisclock(){
-	return(timer);
-}
-
-void resetclock(){
-	DISABLE();
-	timer = 0;
-	ENABLE();
-}
 
 
 // If an interrupt were to happen inside enqueue or dispatch, the threads 

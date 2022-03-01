@@ -40,7 +40,7 @@ void LCD_Init(void)
 	*/
 	
 	EIMSK = (1 << PCIE1) | (1 << PCIE0);
-	EMIF = (1 << PCIF1) | (1 << PCIF0);
+	//EMIF = (1 << PCIF1) | (1 << PCIF0);
 	PCMSK1 = (1 << PCINT15) | (1 << PCINT14) | (1 << PCINT12);
 	PCMSK0 = (1 << PCINT3) | (1 << PCINT2);
 

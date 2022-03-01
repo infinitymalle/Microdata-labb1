@@ -44,7 +44,11 @@ void LCD_Init(void)
 	/*
 		Enables Joystick
 	*/
-	PORTB = (1 << PB7) | (1 << PB6) | (1 << PB4) | (1 << PB1) | (1 << PB0) |;
+	
+	DDRB = 0b11010000;								//För att tillåta sättningen av bitarna (Tror vi :))
+	PORTB = (1 << PB7) | (1 << PB4) | (1 << PB6);
+	DDRE = 0b00001100;								//För att tillåta sättningen av bitarna
+	PORTE = (1 << PE2) | (1 << PB3);
 	
 }
 
@@ -86,4 +90,6 @@ void writeChar(char ch, int pos)
 		}
 	}
 }
+
+
 

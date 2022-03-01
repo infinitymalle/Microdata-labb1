@@ -120,6 +120,14 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Gui.c">
+      <SubType>compile</SubType>
+      <Link>Gui.c</Link>
+    </Compile>
+    <Compile Include="Gui.h">
+      <SubType>compile</SubType>
+      <Link>Gui.h</Link>
+    </Compile>
     <Compile Include="Helpfile.c">
       <SubType>compile</SubType>
       <Link>Helpfile.c</Link>

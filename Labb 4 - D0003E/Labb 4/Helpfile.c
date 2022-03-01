@@ -40,26 +40,17 @@ void LCD_Init(void)
 	*/
 	
 	EIMSK = (1 << PCIE1) | (1 << PCIE0);
-	PCMSK1 = (1 << PCINT15);
-	
-	
-	PCMSK1 = (1 << PCINT14)
-	
-	
-	PCMSK1 = (1 << PCINT12)
-	
-	
-	PCMSK0 = (1 << PCINT2)
-	
-	
-	PCMSK0 = (1 << PCINT3)
+	EMIF = (1 << PCIF1) | (1 << PCIF0);
+	PCMSK1 = (1 << PCINT15) | (1 << PCINT14) | (1 << PCINT12);
+	PCMSK0 = (1 << PCINT3) | (1 << PCINT2);
+
 	/*
 		Enables Joystick
 	*/
 	
-	DDRB = 0b11010000;								//För att tillåta sättningen av bitarna (Tror vi :))
+	//DDRB = 0b11010000;								//FÃ¶r att tillÃ¥ta sÃ¤ttningen av bitarna (Tror vi :))
 	PORTB = (1 << PB7) | (1 << PB4) | (1 << PB6);
-	DDRE = 0b00001100;								//För att tillåta sättningen av bitarna
+	//DDRE = 0b00001100;								//FÃ¶r att tillÃ¥ta sÃ¤ttningen av bitarna
 	PORTE = (1 << PE2) | (1 << PB3);
 	
 }

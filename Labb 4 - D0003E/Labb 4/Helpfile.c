@@ -38,9 +38,21 @@ void LCD_Init(void)
 	/*
 		Interrupts are enabled on the 7th pin of PORTB
 	*/
-	PCMSK1 = (1 << PCINT15);
-	EIMSK = (1 << PCIE1);
 	
+	EIMSK = (1 << PCIE1) | (1 << PCIE0);
+	PCMSK1 = (1 << PCINT15);
+	
+	
+	PCMSK1 = (1 << PCINT14)
+	
+	
+	PCMSK1 = (1 << PCINT12)
+	
+	
+	PCMSK0 = (1 << PCINT2)
+	
+	
+	PCMSK0 = (1 << PCINT3)
 	/*
 		Enables Joystick
 	*/

@@ -15,7 +15,7 @@ void LCD_Init(void)
 		LCDPM's  - Number of Segments = 25
 	*/
 	
-	LCDCRB = (1 << LCDCS) | (1 << LCDMUX1) | (1 << LCDMUX0) | (1 << LCDPM2) | (1 << LCDPM1) | (1 << LCDPM0);
+	LCDCRB = (1 << LCDMUX1) | (1 << LCDMUX0) | (1 << LCDPM2) | (1 << LCDPM1) | (1 << LCDPM0);  //(1 << LCDCS)
 	
 	/*
 		LCD Frame Rate Register:
@@ -39,7 +39,7 @@ void LCD_Init(void)
 	LCDCRA = (1 << LCDEN) | (1 << LCDAB);
 	
 	// start joystick
-	//DDRB = 0b11010000;								//För att tillåta sättningen av bitarna (Tror vi :))
+	//DDRB = 0b11010000;								//FÃ¶r att tillÃ¥ta sÃ¤ttningen av bitarna (Tror vi :))
 	//EIFR = (1 << PCIF0) | (1 << PCIF1);
 	DDRE   = (1<<DDE6) | (1<<DDE4);
 	EIMSK = (1 << PCIE1) | (1 << PCIE0);

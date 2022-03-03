@@ -3,6 +3,7 @@
 
 #define initGUI(left, right) {initObject(), 0, 1}
 #include <stdbool.h>
+#include "TinyTimber.h"
 
 typedef struct {
 	Object super;

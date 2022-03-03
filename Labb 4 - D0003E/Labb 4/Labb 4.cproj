@@ -144,8 +144,24 @@
       <SubType>compile</SubType>
       <Link>Gui.h</Link>
     </Compile>
+    <Compile Include="Joystick.c">
+      <SubType>compile</SubType>
+      <Link>Joystick.c</Link>
+    </Compile>
+    <Compile Include="Joystick.h">
+      <SubType>compile</SubType>
+      <Link>Joystick.h</Link>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PulseGenerator.c">
+      <SubType>compile</SubType>
+      <Link>PulseGenerator.c</Link>
+    </Compile>
+    <Compile Include="PulseGenerator.h">
+      <SubType>compile</SubType>
+      <Link>PulseGenerator.h</Link>
     </Compile>
     <Compile Include="TinyTimber.c">
       <SubType>compile</SubType>

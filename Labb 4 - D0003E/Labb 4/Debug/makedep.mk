@@ -4,7 +4,11 @@
 
 Gui.c
 
+Joystick.c
+
 main.c
+
+PulseGenerator.c
 
 TinyTimber.c
 

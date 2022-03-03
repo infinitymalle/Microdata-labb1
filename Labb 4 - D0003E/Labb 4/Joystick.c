@@ -1,6 +1,13 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdbool.h>
+#include "Joystick.h"
+
+void direction(){
+	if (PINB >> 7 == 0){
+		
+	}
+}
 
 void button(){
 	LCDDR8 = 1;

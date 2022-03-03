@@ -1,8 +1,9 @@
-#ifndef _JOYSTICK_
-#define _JOYSTICK_
+#ifndef JOYSTICK_H_
+#define JOYSTICK_H_
 
 #include "TinyTimber.h"
 #include "GUI.h"
+#include "PulseGenerator.h"
 
 #define initJoystick() {initObject()}
 
@@ -15,4 +16,4 @@ void switch();
 void hold();
 void button();
 
-#endif _JOYSTICK_
+#endif JOYSTICK_H_

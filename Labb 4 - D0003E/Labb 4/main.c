@@ -9,6 +9,7 @@ int main(void)
     CLKPR = 0x80;
     CLKPR = 0x00;
     LCD_Init();
+	initGUI(left, right);
 	
 }
 

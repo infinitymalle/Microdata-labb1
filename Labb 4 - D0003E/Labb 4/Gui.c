@@ -15,7 +15,7 @@ void LCD_Init(void)
 		LCDPM's  - Number of Segments = 25
 	*/
 	
-	LCDCRB = (1 << LCDMUX1) | (1 << LCDMUX0) | (1 << LCDPM2) | (1 << LCDPM1) | (1 << LCDPM0);  //(1 << LCDCS)
+	LCDCRB = (1 << LCDCS) | (1 << LCDMUX1) | (1 << LCDMUX0) | (1 << LCDPM2) | (1 << LCDPM1) | (1 << LCDPM0);
 	
 	/*
 		LCD Frame Rate Register:
@@ -41,38 +41,41 @@ void LCD_Init(void)
 	// start joystick
 	//DDRB = 0b11010000;								//För att tillåta sättningen av bitarna (Tror vi :))
 	//EIFR = (1 << PCIF0) | (1 << PCIF1);
-	DDRE   = (1<<DDE6) | (1<<DDE4);
-	EIMSK = (1 << PCIE1) | (1 << PCIE0);
+	DDRB  = (1 << DDB7) | (1 << DDB6) | (1 << DDB4) | DDRB;
+	DDRE  = (1 << DDE3) | (1 << DDE2) | DDRE;
+	EIMSK = (1 << PCIE1) | (1 << PCIE0) | EIMSK;
 	/*
 		Joystick up
 	*/
-	PCMSK1 = (1 << PCINT14);
-	PORTB = (1 << PB6);
+	PCMSK1 = (1 << PCINT14) | PCMSK1;
+	PORTB = (1 << PB6) | PORTB;
 	
 	/*
 		Joystick down
 	*/
-	PCMSK1 = (1 << PCINT15);
-	PORTB = (1 << PB7);
+	PCMSK1 = (1 << PCINT15) | PCMSK1;
+	PORTB = (1 << PB7) | PORTB;
 	
 	/*
 		Joystick right
 	*/
-	PCMSK0 = (1 << PCINT3);
-	PORTE = (1 << PE3);
+	PCMSK0 = (1 << PCINT3) | PCMSK0;
+	PORTE = (1 << PE3) | PORTE;
 	
 	/*
 		Joystick left
 	*/
-	PCMSK0 =  (1 << PCINT2);
-	PORTE =  (1 << PE2);
+	PCMSK0 =  (1 << PCINT2) | PCMSK0;
+	PORTE =  (1 << PE2) | PORTE;
 	
 	/*
 		Joystick press
 	*/
-	PCMSK1 = (1 << PCINT12);
-	PORTB = (1 << PB4);
+	PCMSK1 = (1 << PCINT12) | PCMSK1;
+	PORTB = (1 << PB4) | PORTB;
 	
+	//LCDDR1  = 0x40 | (LCDDR1  & 0x99);
+	LCDDR0  = 0x20   | (LCDDR0  & 0x99);
 	//EMIF = (1 << PCIF1) | (1 << PCIF0);
 	
 	
@@ -122,30 +125,7 @@ void writeChar(char ch, int pos)
 	}
 }
 
-void button(){
-	LCDDR8 = 1;
-	LCDDR13 = 0;
-	
-	bool buttonPushed = false;
-	volatile int i = 1;
-	while(i){
-		if (PINE >> 2 == 0 && !buttonPushed && LCDDR13 == 0x1){
-			buttonPushed = true;
-			LCDDR13 = 0;
-			LCDDR8 = 1;
-		}
-		
-		else if (PINE >> 2 == 0 && !buttonPushed && LCDDR8 == 0x1) {
-			buttonPushed = true;
-			LCDDR13 = 1;
-			LCDDR8 = 0;
-		}
-		
-		else if (PINE >> 2 == 1){
-			buttonPushed = false;
-		}
-	}
-}
+
 
 
 

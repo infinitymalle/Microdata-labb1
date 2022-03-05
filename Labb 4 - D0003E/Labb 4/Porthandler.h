@@ -5,6 +5,7 @@
 #include "TinyTimber.h"
 #include "Gui.h"
 #include "PulseGenerator.h"
+#include "Joystick.h"
 
 #define initPulse(focus, pulse1, pulse2, gui) {initObject(), focus, pulse1, pulse2, gui}
 
@@ -18,4 +19,4 @@ typedef struct {
 
 void changefocus(Pulse *self, int newfocus);
 void updategui(Pulse *self);
-#endif PULSEHANDLER_H_
+#endif

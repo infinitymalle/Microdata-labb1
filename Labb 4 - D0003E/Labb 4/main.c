@@ -19,7 +19,7 @@ int main(void)
 	Pulsegen pulse1 = initPulsegen(0, 0, 1);
 	Pulsegen pulse2 = initPulsegen(0, 0, 0);
 	Pulse pulse = initPulse(1, &pulse1, &pulse2, &gui);
-	Joystick joystick = initJoystick(&pulse1, &pulse2);
+	Joystick joystick = initJoystick(&pulse);
 	
 	INSTALL(&joystick, direction, IRQ_PCINT0);
 	INSTALL(&joystick, direction, IRQ_PCINT1);

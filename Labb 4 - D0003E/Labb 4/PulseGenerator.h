@@ -22,4 +22,4 @@ void stored(Pulsegen *self);
 void changedisplaysegment(Pulsegen *self); 
 //void generate(Pulsegen *self);	// Genererar pulser
 
-#endif PULSEGEN_H_
+#endif

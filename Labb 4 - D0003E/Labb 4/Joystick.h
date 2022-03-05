@@ -7,15 +7,15 @@
 #include "Porthandler.h"
 #include "Gui.h"
 
-#define initJoystick(pulse, pulsegen) {initObject(), pulse, pulsegen}
+#define initJoystick(pulse) {initObject(), pulse}
 
 typedef struct {
 	Object super;
 	Pulse *pulse;
-	Pulsegen *pulsegen;
+	//Pulsegen *pulsegen;
 } Joystick;
 
 void direction(Joystick *self);		//upp, ner eller tryck
 void changepulsegenerator(Joystick *self);	//höger eller vänster
 
-#endif JOYSTICK_H_
+#endif

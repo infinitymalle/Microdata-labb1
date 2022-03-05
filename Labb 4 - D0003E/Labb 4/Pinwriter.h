@@ -14,4 +14,4 @@ typedef struct {
 } Writer;
 
 void focus(Writer *self);
-#endif PINWRITER_H_
+#endif

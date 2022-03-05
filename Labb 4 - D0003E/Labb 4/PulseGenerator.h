@@ -1,11 +1,13 @@
 #ifndef PULSEGEN_H_
 #define PULSEGEN_H_
 
+#include <avr/io.h>
 #include "TinyTimber.h"
 #include "Gui.h"
 #include "Joystick.h"
+#include "Porthandler.h"
 
-#define initPulsegen() {initObject(), 0, 0, 1}
+#define initPulsegen(currentFreq, storedFreq, port) {initObject(), currentFreq, storedFreq, port}
 	
 typedef struct {
 	Object super;
@@ -18,6 +20,6 @@ void increase(Pulsegen *self);
 void decrease(Pulsegen *self);
 void stored(Pulsegen *self);
 void changedisplaysegment(Pulsegen *self); 
-void generate(Pulsegen *self);	// Genererar pulser
+//void generate(Pulsegen *self);	// Genererar pulser
 
 #endif PULSEGEN_H_

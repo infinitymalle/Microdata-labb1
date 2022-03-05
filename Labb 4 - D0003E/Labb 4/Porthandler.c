@@ -8,8 +8,8 @@ void changefocus(Pulse *self, int newfocus){
 	self->focus = newfocus;
 }
 void updategui(Pulse *self){
-	if(Pulse->focus == 1){
-		ASYNC(self->GUI, updatedisplay,  );
+	if(self->focus == 1){
+		ASYNC(self->gui, updatedisplay,  );
 	}
 }
 

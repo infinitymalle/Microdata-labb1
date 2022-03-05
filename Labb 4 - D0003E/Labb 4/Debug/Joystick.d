@@ -12,8 +12,8 @@ Joystick.d Joystick.o: .././Joystick.c \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- .././Joystick.h .././TinyTimber.h .././GUI.h .././PulseGenerator.h \
- .././Gui.h
+ .././Joystick.h .././TinyTimber.h .././PulseGenerator.h .././Gui.h \
+ .././Porthandler.h
 
 f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -45,8 +45,8 @@ f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 .././TinyTimber.h:
 
-.././GUI.h:
-
 .././PulseGenerator.h:
 
 .././Gui.h:
+
+.././Porthandler.h:

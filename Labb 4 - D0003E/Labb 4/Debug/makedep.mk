@@ -8,6 +8,10 @@ Joystick.c
 
 main.c
 
+Pinwriter.c
+
+Porthandler.c
+
 PulseGenerator.c
 
 TinyTimber.c

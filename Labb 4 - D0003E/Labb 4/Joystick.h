@@ -1,11 +1,13 @@
 #ifndef JOYSTICK_H_
 #define JOYSTICK_H_
 
+#include <avr/io.h>
 #include "TinyTimber.h"
 #include "PulseGenerator.h"
 #include "Porthandler.h"
+#include "Gui.h"
 
-#define initJoystick(Pulse *port) {initObject(), Pulse *port}
+#define initJoystick(pulse, pulsegen) {initObject(), pulse, pulsegen}
 
 typedef struct {
 	Object super;

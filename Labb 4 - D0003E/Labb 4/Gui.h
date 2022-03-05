@@ -1,7 +1,6 @@
 #ifndef _GUI_h
 #define _GUI_h
 
-#include <stdbool.h>
 #include "TinyTimber.h"
 
 #define initGUI() {initObject()}

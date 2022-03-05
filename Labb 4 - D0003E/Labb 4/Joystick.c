@@ -10,7 +10,7 @@
 void direction(Joystick *self){
 	if (PINB >> 7 == 0){
 		if(self->pulse->focus == 1){
-		AFTER(MSEC(400), self->pulse->pulse1, decrease, 0);
+			AFTER(MSEC(400), self->pulse->pulse1, decrease, 0);
 		}else{
 			AFTER(MSEC(400), self->pulse->pulse2, decrease, 0);
 		}
@@ -34,10 +34,10 @@ void direction(Joystick *self){
 }
 void changepulsegenerator(Joystick *self){
 	if(PINE >> 2 == 0){
-		ASYNC(self->port, changefocus, 1)	
+		ASYNC(self, changefocus, 1);	
 	}
 	
 	else if(PINE >> 3 == 0){
-		ASYNC(self->port, changefocus, 0)
+		ASYNC(self, changefocus, 0);
 	}
 }

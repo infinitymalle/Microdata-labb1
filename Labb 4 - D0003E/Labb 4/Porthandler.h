@@ -1,17 +1,19 @@
 #ifndef PULSEHANDLER_H_
 #define PULSEHANDLER_H_
 
+#include <avr/io.h>
 #include "TinyTimber.h"
-#include "GUI.h"
-#include "Joystick.h"
+#include "Gui.h"
+#include "PulseGenerator.h"
 
-#define initPulse(Pulsegen *pulse1, Pulsegen *pulse2) {initObject(), 0}
+#define initPulse(focus, pulse1, pulse2, gui) {initObject(), focus, pulse1, pulse2, gui}
 
 typedef struct {
 	Object super;
-	int focus; // 1 blir vänster o blir höger
-	Pulsegen pulse1;
-	Pulsegen pulse2;
+	int focus; // 1 blir vänster, 0 blir höger
+	Pulsegen *pulse1;
+	Pulsegen *pulse2;
+	GUI *gui;
 } Pulse;
 
 void changefocus(Pulse *self, int newfocus);

@@ -155,6 +155,22 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Pinwriter.c">
+      <SubType>compile</SubType>
+      <Link>Pinwriter.c</Link>
+    </Compile>
+    <Compile Include="Pinwriter.h">
+      <SubType>compile</SubType>
+      <Link>Pinwriter.h</Link>
+    </Compile>
+    <Compile Include="Porthandler.c">
+      <SubType>compile</SubType>
+      <Link>Porthandler.c</Link>
+    </Compile>
+    <Compile Include="Porthandler.h">
+      <SubType>compile</SubType>
+      <Link>Porthandler.h</Link>
+    </Compile>
     <Compile Include="PulseGenerator.c">
       <SubType>compile</SubType>
       <Link>PulseGenerator.c</Link>

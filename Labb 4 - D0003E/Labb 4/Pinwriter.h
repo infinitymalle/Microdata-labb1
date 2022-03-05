@@ -9,9 +9,9 @@
 
 typedef struct {
 	Object super;
+	Pulse *pulse;
 	int left;
-	
 } Writer;
 
-void focus(Port, *self);
+void focus(Writer *self);
 #endif PINWRITER_H_

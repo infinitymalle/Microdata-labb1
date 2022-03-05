@@ -5,7 +5,7 @@
 #include "Gui.h"
 #include "Joystick.h"
 
-#define initPulse() {initObject()}
+#define initPulse() {initObject(), 0, 0, 1}
 	
 typedef struct {
 	Object super;
@@ -17,5 +17,6 @@ typedef struct {
 void increase(Pulse *self);
 void decrease(Pulse *self);
 void stored(Pulse *self);
+void generate(Pulse *self);
 
 #endif PULSEGEN_H_

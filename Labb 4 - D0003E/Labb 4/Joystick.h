@@ -9,11 +9,13 @@
 
 typedef struct {
 	Object super;
+	Pulse *pulse;
+	GUI *gui;
 } Joystick;
 
-void direction();
-void switch();
-void hold();
-void button();
+void direction(Joystick *self);
+void switchGen(Joystick *self);
+void hold(Joystick *self);
+void button(Joystick *self);
 
 #endif JOYSTICK_H_

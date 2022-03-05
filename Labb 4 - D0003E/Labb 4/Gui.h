@@ -1,14 +1,13 @@
 #ifndef _GUI_h
 #define _GUI_h
 
-#define initGUI(left, right) {initObject(), 0, 1}
 #include <stdbool.h>
 #include "TinyTimber.h"
 
+#define initGUI() {initObject()}
+
 typedef struct {
 	Object super;
-	bool left;
-	bool right;
 } GUI;
 
 void LCD_Init();

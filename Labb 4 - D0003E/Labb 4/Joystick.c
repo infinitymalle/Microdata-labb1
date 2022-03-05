@@ -1,15 +1,23 @@
 #include <avr/io.h>
+#include <avr/iom169p.h>
 #include <avr/interrupt.h>
 #include <stdbool.h>
 #include "Joystick.h"
+#include "TinyTimber.h"
+#include "PulseGenerator.h"
 
-void direction(){
+void direction(Joystick *self){
 	if (PINB >> 7 == 0){
-		
+		//ASYNC(self->pulse->currentFreq, increase, 0);
+		AFTER(MSEC(400), self->pulse, increase, 0);
+	}
+	
+	else if (PINB >> 6 == 0){
+		AFTER(MSEC(400), self->pulse, decrease, 0);
 	}
 }
 
-void button(){
+void button(Joystick *self){
 	LCDDR8 = 1;
 	LCDDR13 = 0;
 	

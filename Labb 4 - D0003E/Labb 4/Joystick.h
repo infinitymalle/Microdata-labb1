@@ -14,8 +14,8 @@ typedef struct {
 } Joystick;
 
 void direction(Joystick *self);
-void switchGen(Joystick *self);
-void hold(Joystick *self);
+//void switchGen(Joystick *self);
+//void hold(Joystick *self);
 void button(Joystick *self);
 
 #endif JOYSTICK_H_

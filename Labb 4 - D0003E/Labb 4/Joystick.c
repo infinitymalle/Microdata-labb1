@@ -9,11 +9,15 @@
 void direction(Joystick *self){
 	if (PINB >> 7 == 0){
 		//ASYNC(self->pulse->currentFreq, increase, 0);
-		AFTER(MSEC(400), self->pulse, increase, 0);
+		AFTER(MSEC(400), self->pulse, decrease, 0);
 	}
 	
 	else if (PINB >> 6 == 0){
-		AFTER(MSEC(400), self->pulse, decrease, 0);
+		AFTER(MSEC(400), self->pulse, increase, 0);
+	}
+	
+	else if(PINB >> 4 == 0){
+		ASYNC(self->pulse, stored, 0);
 	}
 }
 

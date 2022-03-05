@@ -5,18 +5,19 @@
 #include "Gui.h"
 #include "Joystick.h"
 
-#define initPulse() {initObject(), 0, 0, 1}
+#define initPulsegen() {initObject(), 0, 0, 1}
 	
 typedef struct {
 	Object super;
-	int currentFreq;
-	int storedFreq;
-	int port;
-} Pulse;
+	int currentFreq;	// Nuvarande frekvens
+	int storedFreq;		// Sparad frekvens
+	int port;			// Höger eller vänster
+} Pulsegen;
 
-void increase(Pulse *self);
-void decrease(Pulse *self);
-void stored(Pulse *self);
-void generate(Pulse *self);
+void increase(Pulsegen *self);
+void decrease(Pulsegen *self);
+void stored(Pulsegen *self);
+void changedisplaysegment(Pulsegen *self); 
+void generate(Pulsegen *self);	// Genererar pulser
 
 #endif PULSEGEN_H_

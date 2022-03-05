@@ -2,20 +2,18 @@
 #define JOYSTICK_H_
 
 #include "TinyTimber.h"
-#include "GUI.h"
 #include "PulseGenerator.h"
+#include "Porthandler.h"
 
-#define initJoystick() {initObject()}
+#define initJoystick(Pulse *port) {initObject(), Pulse *port}
 
 typedef struct {
 	Object super;
 	Pulse *pulse;
-	GUI *gui;
+	Pulsegen *pulsegen;
 } Joystick;
 
-void direction(Joystick *self);
-//void switchGen(Joystick *self);
-//void hold(Joystick *self);
-void button(Joystick *self);
+void direction(Joystick *self);		//upp, ner eller tryck
+void changepulsegenerator(Joystick *self);	//höger eller vänster
 
 #endif JOYSTICK_H_

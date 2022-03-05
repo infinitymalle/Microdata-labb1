@@ -3,19 +3,19 @@
 #include <stdbool.h>
 #include "PulseGenerator.h"
 
-void increase(Pulse *self){
+void increase(Pulsegen *self){
 	if (self->currentFreq < 99 && self->currentFreq >= 0){
 		self->currentFreq++;
 	}
 }
 
-void decrease(Pulse *self){
+void decrease(Pulsegen *self){
 	if (self->currentFreq <=99 && self->currentFreq > 0){
 		self->currentFreq--;
 	}
 }
 
-void stored(Pulse *self){
+void stored(Pulsegen *self){
 	if(self->currentFreq != 0){
 		self->storedFreq = self->currentFreq;
 		self->currentFreq = 0;
@@ -25,6 +25,6 @@ void stored(Pulse *self){
 	}
 }
 
-void generate(Pulse *self){
+void generate(Pulsegen *self){
 	
 }

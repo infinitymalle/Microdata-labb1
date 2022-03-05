@@ -13,5 +13,5 @@ typedef struct {
 void LCD_Init();
 void printAt(long num, int pos);
 void writeChar(char ch, int pos);
-
+void updatedisplay();
 #endif _GUI_h

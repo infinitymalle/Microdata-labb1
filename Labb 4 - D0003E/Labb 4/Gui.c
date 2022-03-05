@@ -4,8 +4,6 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 
-void button();
-
 void LCD_Init(void)
 {
 	/*
@@ -83,7 +81,6 @@ void LCD_Init(void)
 	printAt(0, '1');
 	printAt(0, '4');
 	printAt(0, '5');
-	button();
 }
 
 void printAt(long num, int pos) {
@@ -125,6 +122,9 @@ void writeChar(char ch, int pos)
 	}
 }
 
+void updatedisplay(){
+	
+}
 
 
 

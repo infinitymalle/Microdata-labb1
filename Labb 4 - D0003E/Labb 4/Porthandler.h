@@ -2,12 +2,14 @@
 #define PULSEHANDLER_H_
 
 #include <avr/io.h>
-#include "TinyTimber.h"
+#include <avr/interrupt.h>
+#include <stdbool.h>
+//#include "TinyTimber.h"
 #include "Gui.h"
 #include "PulseGenerator.h"
-#include "Joystick.h"
+//#include "Joystick.h"
 
-#define initPulse(focus, pulse1, pulse2, gui) {initObject(), focus, pulse1, pulse2, gui}
+#define initPulse(focus, pulse1, pulse2, gui) {initObject(), focus, pulse1, pulse2, gui};
 
 typedef struct {
 	Object super;

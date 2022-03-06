@@ -2,8 +2,9 @@
 #define _GUI_h
 
 #include "TinyTimber.h"
+//#include "PulseGenerator.h"
 
-#define initGUI() {initObject()}
+#define initGUI() {initObject()};
 
 typedef struct {
 	Object super;
@@ -12,5 +13,6 @@ typedef struct {
 void LCD_Init();
 void printAt(long num, int pos);
 void writeChar(char ch, int pos);
-void updatedisplay();
+//void currentFrequency(GUI *self);
+void updatedisplay(int pos);
 #endif

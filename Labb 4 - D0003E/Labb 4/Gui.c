@@ -77,10 +77,7 @@ void LCD_Init(void)
 	//EMIF = (1 << PCIF1) | (1 << PCIF0);
 	
 	
-	printAt(0, '0');
-	printAt(0, '1');
-	printAt(0, '4');
-	printAt(0, '5');
+	
 }
 
 void printAt(long num, int pos) {
@@ -122,8 +119,17 @@ void writeChar(char ch, int pos)
 	}
 }
 
-void updatedisplay(){
-	
+// int currentFrequency(GUI *self){
+// 	if (self->pulse->focus == 1){
+// 		return self->pulse->pulse1->currentFreq;
+// 	}
+// 	else{
+// 		return self->pulse->pulse2->currentFreq;
+// 	}
+// }
+
+void updatedisplay(int pos){
+	printAt(3, pos);
 }
 
 

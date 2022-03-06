@@ -3,9 +3,9 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 #include "Joystick.h"
-#include "TinyTimber.h"
-#include "PulseGenerator.h"
-#include "Porthandler.h"
+//#include "TinyTimber.h"
+//#include "PulseGenerator.h"
+//#include "Porthandler.h"
 
 void direction(Joystick *self){
 	if (PINB >> 7 == 0){
@@ -34,10 +34,10 @@ void direction(Joystick *self){
 }
 void changepulsegenerator(Joystick *self){
 	if(PINE >> 2 == 0){
-		ASYNC(self, changefocus, 1);	
+		ASYNC(self->pulse, changefocus, 1);	
 	}
 	
 	else if(PINE >> 3 == 0){
-		ASYNC(self, changefocus, 0);
+		ASYNC(self->pulse, changefocus, 0);
 	}
 }

@@ -12,8 +12,7 @@ PulseGenerator.d PulseGenerator.o: .././PulseGenerator.c \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- .././PulseGenerator.h .././TinyTimber.h .././Gui.h .././Joystick.h \
- .././GUI.h
+ .././PulseGenerator.h .././TinyTimber.h
 
 f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -44,9 +43,3 @@ f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 .././PulseGenerator.h:
 
 .././TinyTimber.h:
-
-.././Gui.h:
-
-.././Joystick.h:
-
-.././GUI.h:

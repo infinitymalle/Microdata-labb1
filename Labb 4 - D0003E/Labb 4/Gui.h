@@ -2,7 +2,6 @@
 #define _GUI_h
 
 #include "TinyTimber.h"
-//#include "PulseGenerator.h"
 
 #define initGUI() {initObject()};
 

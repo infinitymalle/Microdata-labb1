@@ -12,7 +12,7 @@ Porthandler.d Porthandler.o: .././Porthandler.c \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- .././Porthandler.h .././Gui.h .././TinyTimber.h .././PulseGenerator.h
+ .././Porthandler.h .././TinyTimber.h .././Gui.h .././PulseGenerator.h
 
 f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -42,8 +42,8 @@ f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 .././Porthandler.h:
 
-.././Gui.h:
-
 .././TinyTimber.h:
+
+.././Gui.h:
 
 .././PulseGenerator.h:

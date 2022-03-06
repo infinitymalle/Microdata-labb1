@@ -12,8 +12,8 @@ Pinwriter.d Pinwriter.o: .././Pinwriter.c \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- .././pinwriter.h .././TinyTimber.h .././Gui.h .././Joystick.h \
- .././PulseGenerator.h .././Porthandler.h
+ .././pinwriter.h .././TinyTimber.h .././Joystick.h .././PulseGenerator.h \
+ .././Porthandler.h .././Gui.h
 
 f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -45,10 +45,10 @@ f:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 .././TinyTimber.h:
 
-.././Gui.h:
-
 .././Joystick.h:
 
 .././PulseGenerator.h:
 
 .././Porthandler.h:
+
+.././Gui.h:

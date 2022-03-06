@@ -39,8 +39,9 @@ void LCD_Init(void)
 	// start joystick
 	//DDRB = 0b11010000;								//För att tillåta sättningen av bitarna (Tror vi :))
 	//EIFR = (1 << PCIF0) | (1 << PCIF1);
-	DDRB  = (1 << DDB7) | (1 << DDB6) | (1 << DDB4) | DDRB;
-	DDRE  = (1 << DDE3) | (1 << DDE2) | DDRE;
+	//DDRB  = (1 << DDB7) | (1 << DDB6) | (1 << DDB4) | DDRB;
+	
+	DDRE  = (1 << DDE6) | (1 << DDE4) | DDRE;		// Sätt portE pin 6 och 4 till output
 	EIMSK = (1 << PCIE1) | (1 << PCIE0) | EIMSK;
 	/*
 		Joystick up
@@ -119,17 +120,8 @@ void writeChar(char ch, int pos)
 	}
 }
 
-// int currentFrequency(GUI *self){
-// 	if (self->pulse->focus == 1){
-// 		return self->pulse->pulse1->currentFreq;
-// 	}
-// 	else{
-// 		return self->pulse->pulse2->currentFreq;
-// 	}
-// }
-
-void updatedisplay(int pos){
-	printAt(3, pos);
+void updatedisplay(int currentFreq){
+	printAt(currentFreq, 4);
 }
 
 

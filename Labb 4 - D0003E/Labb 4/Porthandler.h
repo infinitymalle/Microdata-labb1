@@ -4,10 +4,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdbool.h>
-//#include "TinyTimber.h"
+#include "TinyTimber.h"
 #include "Gui.h"
 #include "PulseGenerator.h"
-//#include "Joystick.h"
 
 #define initPulse(focus, pulse1, pulse2, gui) {initObject(), focus, pulse1, pulse2, gui};
 

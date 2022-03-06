@@ -31,6 +31,8 @@ void direction(Joystick *self){
 			ASYNC(self->pulse->pulse2, stored, 0);
 		}
 	}
+	
+	ASYNC(self->pulse, updategui, 0);
 }
 void changepulsegenerator(Joystick *self){
 	if(PINE >> 2 == 0){

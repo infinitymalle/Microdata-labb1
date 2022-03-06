@@ -2,7 +2,7 @@
 #define PINWRITER_H_
 
 #include "TinyTimber.h"
-#include "Gui.h"
+//#include "Gui.h"
 #include "Joystick.h"
 
 #define initWriter() {initObject(), 0}

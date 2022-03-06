@@ -13,7 +13,7 @@ int main(void)
 {
     CLKPR = 0x80;
     CLKPR = 0x00;
-    LCD_Init();
+    //LCD_Init();
 	
 	GUI gui = initGUI();
 	Pulsegen pulse1 = initPulsegen(0, 0);
@@ -24,6 +24,6 @@ int main(void)
 	INSTALL(&joystick, direction, IRQ_PCINT0);
 	INSTALL(&joystick, direction, IRQ_PCINT1);
 	
-	return TINYTIMBER(&gui, updategui, NULL);
+	return TINYTIMBER(&joystick, LCD_Init, NULL);
 }
 

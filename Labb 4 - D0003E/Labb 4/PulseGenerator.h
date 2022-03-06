@@ -3,9 +3,6 @@
 
 #include <avr/io.h>
 #include "TinyTimber.h"
-//#include "Gui.h"
-//#include "Joystick.h"
-//#include "Porthandler.h"
 
 #define initPulsegen(currentFreq, storedFreq) {initObject(), currentFreq, storedFreq};
 	

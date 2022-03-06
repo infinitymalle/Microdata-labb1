@@ -13,14 +13,14 @@ void LCD_Init(void)
 		LCDPM's  - Number of Segments = 25
 	*/
 	
-	LCDCRB = (1 << LCDCS) | (1 << LCDMUX1) | (1 << LCDMUX0) | (1 << LCDPM2) | (1 << LCDPM1) | (1 << LCDPM0);
+	LCDCRB = (1 << LCDCS) | (1 << LCDMUX1) | (1 << LCDMUX0) | (1 << LCDPM2) | (1 << LCDPM1) | (1 << LCDPM0) | LCDCRB;
 	
 	/*
 		LCD Frame Rate Register:
 		LCDCD's - Prescaler setting N = 16
 	*/
 	
-	LCDFRR = (1 << LCDCD2) | (1 << LCDCD1) | (1 << LCDCD0);
+	LCDFRR = (1 << LCDCD2) | (1 << LCDCD1) | (1 << LCDCD0) | LCDFRR;
 	
 	/*
 		LCD Contrast Control Register
@@ -28,57 +28,15 @@ void LCD_Init(void)
 		LCDCC's = 3,35V
 	*/
 	
-	LCDCCR = (1 << LCDCC3) | (1 << LCDCC2) | (1 << LCDCC1) | (1 << LCDCC0);
+	LCDCCR = (1 << LCDCC3) | (1 << LCDCC2) | (1 << LCDCC1) | (1 << LCDCC0) | LCDCCR;
 	
 	/*
 		LCDEN = LCD Enabled
 		LCDAB = Low Power Waveform
 	*/
-	LCDCRA = (1 << LCDEN) | (1 << LCDAB);
-	
-	// start joystick
-	//DDRB = 0b11010000;								//För att tillåta sättningen av bitarna (Tror vi :))
-	//EIFR = (1 << PCIF0) | (1 << PCIF1);
-	//DDRB  = (1 << DDB7) | (1 << DDB6) | (1 << DDB4) | DDRB;
-	
-	DDRE  = (1 << DDE6) | (1 << DDE4) | DDRE;		// Sätt portE pin 6 och 4 till output
-	EIMSK = (1 << PCIE1) | (1 << PCIE0) | EIMSK;
-	/*
-		Joystick up
-	*/
-	PCMSK1 = (1 << PCINT14) | PCMSK1;
-	PORTB = (1 << PB6) | PORTB;
-	
-	/*
-		Joystick down
-	*/
-	PCMSK1 = (1 << PCINT15) | PCMSK1;
-	PORTB = (1 << PB7) | PORTB;
-	
-	/*
-		Joystick right
-	*/
-	PCMSK0 = (1 << PCINT3) | PCMSK0;
-	PORTE = (1 << PE3) | PORTE;
-	
-	/*
-		Joystick left
-	*/
-	PCMSK0 =  (1 << PCINT2) | PCMSK0;
-	PORTE =  (1 << PE2) | PORTE;
-	
-	/*
-		Joystick press
-	*/
-	PCMSK1 = (1 << PCINT12) | PCMSK1;
-	PORTB = (1 << PB4) | PORTB;
-	
-	//LCDDR1  = 0x40 | (LCDDR1  & 0x99);
-	LCDDR0  = 0x20   | (LCDDR0  & 0x99);
-	//EMIF = (1 << PCIF1) | (1 << PCIF0);
-	
-	
-	
+	LCDCRA = (1 << LCDEN) | (1 << LCDAB) | LCDCRA;
+	printAt(0, 0);
+	printAt(0, 4);
 }
 
 void printAt(long num, int pos) {
@@ -120,10 +78,32 @@ void writeChar(char ch, int pos)
 	}
 }
 
-void updatedisplay(int currentFreq){
-	printAt(currentFreq, 4);
+void updatedisplay(GUI *self){
+	if(self->focus == 1){
+		printAt(SYNC(self->pg[0], getfreq, NULL), 0);
+	}else{
+		printAt(SYNC(self->pg[1], getfreq, NULL), 4);
+	}
 }
 
+void changefocus(GUI *self, int newfocus){
+	self->focus = newfocus;
+	if (self->focus == 1){
+		LCDDR3 = 0;
+		LCDDR0 |= 1 << 1;
+	}else{
+		LCDDR3 = 1;
+		LCDDR0 &= ~(1 << 1);
+	}
+}
+
+//void inc(GUI *self){
+	//AFTER()
+//}
+//
+//void dec(GUI *self){
+	//
+//}
 
 
 

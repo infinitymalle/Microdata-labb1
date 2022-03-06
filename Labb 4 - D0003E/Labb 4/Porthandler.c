@@ -1,16 +1,16 @@
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <stdbool.h>
-#include "Porthandler.h"
-
-void changefocus(Pulse *self, int newfocus){
-	self->focus = newfocus;
-}
-void updategui(Pulse *self){
-	if(self->focus == 1){
-		ASYNC(self->gui, updatedisplay, self->pulse1->currentFreq);
-	}else{
-		ASYNC(self->gui, updatedisplay, self->pulse2->currentFreq);
-	}
-}
-
+//#include <avr/io.h>
+//#include <avr/interrupt.h>
+//#include <stdbool.h>
+//#include "porthandler.h"
+//
+//void changefocus(pulse *self){
+	//if(self->gui->focus == 1){
+		//self->gui->focus = 0;
+	//}else{
+	//self->gui->focus = 1;
+	//}
+//}
+//void updategui(pulse *self){
+		//async(self->gui, updatedisplay, self->pulse);
+//}
+//

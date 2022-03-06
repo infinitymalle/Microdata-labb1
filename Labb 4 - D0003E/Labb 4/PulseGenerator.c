@@ -24,7 +24,6 @@ void stored(Pulsegen *self){
 		self->currentFreq = self->storedFreq;
 	}
 }
-
-void generate(Pulsegen *self){
-	
+int getfreq(Pulsegen *self){
+	return(self->currentFreq);
 }

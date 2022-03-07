@@ -15,6 +15,7 @@ void printAt(long num, int pos);
 void writeChar(char ch, int pos);
 void updatedisplay(GUI *self);
 void changefocus(GUI *self, int newfocus);
-//void inc(GUI *self);
-//void dec(GUI *self);
+void inc(GUI *self);
+void dec(GUI *self);
+void yoholdon(GUI *self);
 #endif

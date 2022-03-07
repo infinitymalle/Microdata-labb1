@@ -7,14 +7,16 @@
 //#include "PulseGenerator.h"
 //#include "Porthandler.h"
 
-void button_Init(){
+void button_Init(){								
 	
-	// start joystick
-	//DDRB = 0b11010000;								//För att tillåta sättningen av bitarna (Tror vi :))
-	//EIFR = (1 << PCIF0) | (1 << PCIF1);
-	//DDRB  = (1 << DDB7) | (1 << DDB6) | (1 << DDB4) | DDRB;
+	/*
+		Aktiverar PORTE pin 4 samt 6 för output
+	*/
+	DDRE  = (1 << DDE6) | (1 << DDE4) | DDRE;
 	
-	DDRE  = (1 << DDE6) | (1 << DDE4) | DDRE;		// Sätt portE pin 6 och 4 till output
+	/*
+		Button interupt
+	*/
 	EIMSK = (1 << PCIE1) | (1 << PCIE0) | EIMSK;
 	/*
 		Joystick up
@@ -45,38 +47,23 @@ void button_Init(){
 	*/
 	PCMSK1 = (1 << PCINT12) | PCMSK1;
 	PORTB = (1 << PB4) | PORTB;
-	
-	
 }
 
 void direction(Joystick *self){
-
 	if (((PINB >> 7) & 1) == 0){
-		if(self->gui->focus == 1){
-			ASYNC(self->gui->pg[0], decrease, NULL);
-			//AFTER(MSEC(400), self->gui->pg[0], decrease, NULL);
-		}else{
-			ASYNC(self->gui->pg[1], decrease, NULL);
-			//AFTER(MSEC(400), self->gui->pg[1], decrease, NULL);
-		}
-	}else if (((PINB >> 6) & 1) == 0){
-		if(self->gui->focus == 1){
-			ASYNC(self->gui->pg[0], increase, NULL);
-			//AFTER(MSEC(400), self->gui->pg[0], increase, NULL);
-		}else{
-			ASYNC(self->gui->pg[1], increase, NULL);
-			//AFTER(MSEC(400), self->gui->pg[1], increase, NULL);
-		}
-	}else if(((PINB >> 4) & 1) == 0){
-		if(self->gui->focus == 1){
-			ASYNC(self->gui->pg[0], stored, NULL);
-		}else{
-			ASYNC(self->gui->pg[1], stored, NULL);
-		}
+		ASYNC(self->gui, dec, NULL);
 	}
-	LCDDR8 = 0x1;
+	else if (((PINB >> 6) & 1) == 0){
+		ASYNC(self->gui, inc, NULL);
+	}
+	else if(((PINB >> 4) & 1) == 0){
+		ASYNC(self->gui->pg[self->gui->focus], stored, NULL);
+	}
 	ASYNC(self->gui, updatedisplay, 0);
 }
+
+
+
 void changepulsegenerator(Joystick *self){
 	if(((PINE >> 2) & 1) == 0){
 		ASYNC(self->gui, changefocus, 1);	

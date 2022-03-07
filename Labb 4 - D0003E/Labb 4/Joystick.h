@@ -14,5 +14,6 @@ typedef struct {
 void button_Init();
 void direction(Joystick *self);		//upp, ner eller tryck
 void changepulsegenerator(Joystick *self);	//höger eller vänster
+void hold(Joystick *self);
 
 #endif

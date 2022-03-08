@@ -44,6 +44,7 @@ void LCD_Init(void)
 	printAt(0, 0);
 	printAt(0, 4);
 	
+
 	
 }
 
@@ -103,10 +104,6 @@ void updatedisplay(GUI *self){
 void changefocus(GUI *self, int newfocus){
 	self->focus = newfocus;
 	if (self->focus == 1){
-		//LCDDR3 = 0;
-		//LCDDR0 |= 1 << 1;
-		//LCDDR0 |= 1 << 5;
-		//LCDDR1 &= ~(1 << 6);
 		LCDDR1 |= 1 << 3;
 		LCDDR11 |= 1 << 3;
 		LCDDR16 |= 1 << 3;
@@ -120,36 +117,37 @@ void changefocus(GUI *self, int newfocus){
 		LCDDR6 |= 1 << 5;
 		LCDDR11 |= 1 << 5;
 		LCDDR16 |= 1 << 6;
-		//LCDDR3 = 1;
-		//LCDDR1 |= 1 << 6;
-		//LCDDR0 &= ~(1 << 1);
-		//LCDDR0 &= ~(1 << 5);
 	}
 }
 
 void yoholdon(GUI *self){
 	if(((PINB >> 7) & 1) == 0){
-		AFTER(MSEC(150), self,dec, NULL);
+		dec(self);
 		}else if(((PINB >> 6) & 1) == 0){
-		AFTER(MSEC(150), self,inc, NULL);
+		inc(self);
 	}
-	
 }
 
 void inc(GUI *self){
-	if(((PINB >> 6) & 1) == 0){
-		AFTER(MSEC(150), self->pg[self->focus], increase, NULL);
-		yoholdon(self);
+	if((((PINB >> 6) & 1) == 0 ) && (self->buttonflag == 0)){
+		ASYNC(self->pg[self->focus], increase, NULL);
+		self->buttonflag = 1;
+		AFTER(MSEC(150), self, resetbuttonflag, NULL);
 	}
 	updatedisplay(self);
 }
-// LOL kolla joystick
+
 void dec(GUI *self){
-	if (((PINB >> 7) & 1) == 0){
-		AFTER(MSEC(150), self->pg[self->focus], decrease, NULL);
-		yoholdon(self);
+	if ((((PINB >> 7) & 1) == 0) && (self->buttonflag == 0)){
+		ASYNC(self->pg[self->focus], decrease, NULL);
+		self->buttonflag = 1;
+		AFTER(MSEC(150), self, resetbuttonflag, NULL);
 	}
 	updatedisplay(self);
+}
+void resetbuttonflag(GUI *self){
+	self->buttonflag = 0;
+	yoholdon(self);
 }
 
 

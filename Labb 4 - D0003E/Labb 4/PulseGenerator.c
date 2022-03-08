@@ -6,31 +6,16 @@
 void increase(Pulsegen *self){
 	if (self->currentFreq < 99 && self->currentFreq >= 0){
 		self->currentFreq++;
-		//int i = 1;
-		//while(i != 0){
-			//i++;
-			//if(((PINB >> 6) & 1) == 0){
-				//AFTER(MSEC(100), self, increase, NULL);
-			//}else{
-				//i = 0;
-			//}
-		//}
 	}
+	createpulse(self);
 }
 
 void decrease(Pulsegen *self){
 	if (self->currentFreq <=99 && self->currentFreq > 0){
 		self->currentFreq--;
-		//int i = 1;
-		//while(i != 0){
-			//i++;
-			//if(((PINB >> 7) & 1) == 0){
-				//AFTER(MSEC(100), self, decrease, NULL);
-			//}else{
-				//i = 0;
-			//}
-		//}
+
 	}
+	createpulse(self);
 }
 
 
@@ -42,7 +27,23 @@ void stored(Pulsegen *self){
 	else{
 		self->currentFreq = self->storedFreq;
 	}
+	createpulse(self);
 }
-int getfreq(Pulsegen *self){
+
+int getfreq(Pulsegen *self){	
 	return(self->currentFreq);
+}
+
+void createpulse(Pulsegen *self){
+	self->writer->freq = self->currentFreq;
+	if(self->writer->freq != 0){
+		if (self->writer->generateflag == 0){
+			self->writer->generateflag = 1;
+			self->writer->freq = self->currentFreq;
+			AFTER(MSEC(100), self->writer, generateFreq, NULL);
+		}
+	}
+	else{
+		self->writer->generateflag = 0;
+	}
 }

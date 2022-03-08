@@ -3,9 +3,6 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 #include "Joystick.h"
-//#include "TinyTimber.h"
-//#include "PulseGenerator.h"
-//#include "Porthandler.h"
 
 void button_Init(){								
 	

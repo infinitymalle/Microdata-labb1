@@ -10,14 +10,14 @@ int main(void)
 	button_Init();
 	LCD_Init();
 	
-	Pulsegen pg[2] = {initPulsegen(0, 0), initPulsegen(0, 0)};
-	GUI gui = initGUI(pg, pg+1, 1);		// +1 för nästa element
+	Writer writer[2] = {initWriter(4, 0, 0), initWriter(6, 0, 0)};
+	Pulsegen pg[2] = {initPulsegen(0, 0, writer), initPulsegen(0, 0, writer+1)};
+	GUI gui = initGUI(pg, pg+1, 1, 0);		// +1 för nästa element
 	
 	Joystick joystick = initJoystick(&gui);
 	
 	INSTALL(&joystick, changepulsegenerator, IRQ_PCINT0);
 	INSTALL(&joystick, direction, IRQ_PCINT1);
-	//INSTALL(&joystick, hold, IRQ_PCINT1);
 	
 	return TINYTIMBER(joystick.gui, updatedisplay, NULL);
 }

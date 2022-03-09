@@ -145,6 +145,7 @@ void dec(GUI *self){
 	}
 	updatedisplay(self);
 }
+
 void resetbuttonflag(GUI *self){
 	self->buttonflag = 0;
 	yoholdon(self);

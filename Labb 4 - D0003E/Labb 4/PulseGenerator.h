@@ -19,4 +19,5 @@ void stored(Pulsegen *self);
 int getfreq(Pulsegen *self);
 void createpulse(Pulsegen *self);
 
+
 #endif

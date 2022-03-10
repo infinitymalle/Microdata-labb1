@@ -11,7 +11,7 @@ void increase(Pulsegen *self){
 // 		createpulse(self);
 // 	}
 	ASYNC(self->writer, setFreq, self->currentFreq);
-	createpulse(self);
+	ASYNC(self, createpulse, NULL);
 }
 
 void decrease(Pulsegen *self){
@@ -23,7 +23,7 @@ void decrease(Pulsegen *self){
 //  		createpulse(self);
 //  	}
 	ASYNC(self->writer, setFreq, self->currentFreq);
-	 createpulse(self);
+	ASYNC(self, createpulse, NULL);
 }
 
 
@@ -39,7 +39,7 @@ void stored(Pulsegen *self){
 //  		createpulse(self);
 //  	}
 	ASYNC(self->writer, setFreq, self->currentFreq);
-	createpulse(self);
+	ASYNC(self, createpulse, NULL);
 }
 
 int getfreq(Pulsegen *self){	
@@ -53,11 +53,3 @@ if(SYNC(self->writer, getGenFlag, NULL) == 0){
 	ASYNC(self->writer, generateFreq, NULL);
 	}
 }
-	///*self->writer->freq = self->currentFreq;*/
-	//
-	//if(self->currentFreq != 0){
-		//// 		if (SYNC(self->writer, getGenFlag, NULL) == 0){
-		//// 			ASYNC(self->writer, setGenFlag, NULL);
-		//// 			ASYNC(self->writer, setFreq, self->currentFreq);
-		////
-		//// 		}

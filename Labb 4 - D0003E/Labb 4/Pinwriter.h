@@ -13,7 +13,7 @@ typedef struct {
 } Writer;
 
 void generateFreq(Writer *self);
- int getGenFlag(Writer *self);
- void toggleGenFlag(Writer *self);
+int getGenFlag(Writer *self);
+void toggleGenFlag(Writer *self);
 void setFreq(Writer *self, int newFreq);
 #endif

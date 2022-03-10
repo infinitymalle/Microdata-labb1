@@ -35,17 +35,9 @@ void LCD_Init(void)
 		LCDAB = Low Power Waveform
 	*/
 	LCDCRA = (1 << LCDEN) | (1 << LCDAB) | LCDCRA;
-	
-	//ba börjar på något shysst
-	
-	LCDDR1 |= 1 << 3;
-	LCDDR11 |= 1 << 3;
-	LCDDR16 |= 1 << 3;
-	printAt(0, 0);
-	printAt(0, 4);
-	
-
-	
+		printAt(0, 0);
+		printAt(0, 2);
+		printAt(0, 4);
 }
 
 void printAt(long num, int pos) {
@@ -55,8 +47,7 @@ void printAt(long num, int pos) {
 	writeChar( num % 10 + '0', pp);
 }
 
-void writeChar(char ch, int pos)
-{
+void writeChar(char ch, int pos){
 	// All the numbers
 	// 0 - 0x1551, 1 - 0x0110, 2 - 0x1E11, 3 - 0x1B11, 4 - 0x0B50, 5 - 0x1B41, 6 - 0x1F41, 7 - 0x0111, 8 - 0x1F51, 9 - 0x0B51
 	uint16_t scc[] = {0x1551, 0x0110, 0x1E11, 0x1B11, 0x0B50, 0x1B41, 0x1F41, 0x0111, 0x1F51, 0x0B51};
@@ -77,10 +68,10 @@ void writeChar(char ch, int pos)
 					else{
 						*lcddr = *lcddr & 0xF;
 					}
-				}else{
+					}else{
 					if(lcddr == &LCDDR0){
 						*lcddr = *lcddr & 0xD0;
-					}else{
+						}else{
 						*lcddr = *lcddr & 0xF0;
 					}
 				}
@@ -91,62 +82,4 @@ void writeChar(char ch, int pos)
 			}
 		}
 	}
-}
-
-void updatedisplay(GUI *self){
-	if(self->focus == 1){
-		printAt(SYNC(self->pg[self->focus], getfreq, NULL), 0);
-	}else{
-		printAt(SYNC(self->pg[self->focus], getfreq, NULL), 4);
-	}
-}
-
-void changefocus(GUI *self, int newfocus){
-	self->focus = newfocus;
-	if (self->focus == 1){
-		LCDDR1 |= 1 << 3;
-		LCDDR11 |= 1 << 3;
-		LCDDR16 |= 1 << 3;
-		LCDDR6 &= ~(1 << 5);
-		LCDDR11 &= ~(1 << 5);
-		LCDDR16 &= ~(1 << 6);
-	}else{
-		LCDDR1 &= ~(1 << 3);
-		LCDDR11 &= ~(1 << 3);
-		LCDDR16 &= ~(1 << 3);
-		LCDDR6 |= 1 << 5;
-		LCDDR11 |= 1 << 5;
-		LCDDR16 |= 1 << 6;
-	}
-}
-
-void yoholdon(GUI *self){
-	if(((PINB >> 7) & 1) == 0){
-		ASYNC(self, dec, NULL);
-	}else if(((PINB >> 6) & 1) == 0){
-		ASYNC(self, inc, NULL);
-	}
-}
-
-void inc(GUI *self){
-	if((((PINB >> 6) & 1) == 0 ) && (self->buttonflag == 0)){
-		ASYNC(self->pg[self->focus], increase, NULL);
-		self->buttonflag = 1;
-		AFTER(MSEC(150), self, resetbuttonflag, NULL);
-	}
-	ASYNC(self, updatedisplay, NULL);
-}
-
-void dec(GUI *self){
-	if ((((PINB >> 7) & 1) == 0) && (self->buttonflag == 0)){
-		ASYNC(self->pg[self->focus], decrease, NULL);
-		self->buttonflag = 1;
-		AFTER(MSEC(150), self, resetbuttonflag, NULL);
-	}
-	ASYNC(self, updatedisplay, NULL);
-}
-
-void resetbuttonflag(GUI *self){
-	self->buttonflag = 0;
-	AFTER(MSEC(10), self, yoholdon, NULL);
 }

@@ -59,8 +59,6 @@ void direction(Joystick *self){
 	ASYNC(self->gui, updatedisplay, 0);
 }
 
-
-
 void changepulsegenerator(Joystick *self){
 	if(((PINE >> 2) & 1) == 0){
 		ASYNC(self->gui, changefocus, 1);	

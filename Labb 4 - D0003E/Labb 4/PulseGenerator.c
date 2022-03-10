@@ -7,9 +7,6 @@ void increase(Pulsegen *self){
 	if (self->currentFreq < 99 && self->currentFreq >= 0){
 		self->currentFreq++;
 	}
-// 	if(SYNC(self->writer, getGenFlag, NULL) == 0){
-// 		createpulse(self);
-// 	}
 	ASYNC(self->writer, setFreq, self->currentFreq);
 	ASYNC(self, createpulse, NULL);
 }
@@ -19,9 +16,6 @@ void decrease(Pulsegen *self){
 		self->currentFreq--;
 
 	}
-//  	if(SYNC(self->writer, getGenFlag, NULL) == 0){
-//  		createpulse(self);
-//  	}
 	ASYNC(self->writer, setFreq, self->currentFreq);
 	ASYNC(self, createpulse, NULL);
 }

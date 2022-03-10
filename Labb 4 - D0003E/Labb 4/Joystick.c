@@ -48,10 +48,10 @@ void button_Init(){
 
 void direction(Joystick *self){
 	if (((PINB >> 7) & 1) == 0){
-		ASYNC(self->gui, dec, NULL);
+		ASYNC(self->gui, firstDec, NULL);
 	}
 	else if (((PINB >> 6) & 1) == 0){
-		ASYNC(self->gui, inc, NULL);
+		ASYNC(self->gui, firstInc, NULL);
 	}
 	else if(((PINB >> 4) & 1) == 0){
 		ASYNC(self->gui->pg[self->gui->focus], stored, NULL);

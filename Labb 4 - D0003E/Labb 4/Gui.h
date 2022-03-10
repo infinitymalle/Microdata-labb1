@@ -20,4 +20,7 @@ void inc(GUI *self);
 void dec(GUI *self);
 void yoholdon(GUI *self);
 void resetbuttonflag(GUI *self);
+
+void firstInc(GUI *self);
+void firstDec(GUI *self);
 #endif

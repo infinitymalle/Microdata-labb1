@@ -121,19 +121,12 @@ void changefocus(GUI *self, int newfocus){
 	}
 }
 
-void yoholdon(GUI *self){
-	if(((PINB >> 7) & 1) == 0){
-		ASYNC(self, dec, NULL);
-	}else if(((PINB >> 6) & 1) == 0){
-		ASYNC(self, inc, NULL);
-	}
-}
-
 void firstInc(GUI *self){
 	ASYNC(self->pg[self->focus], increase, NULL);
 	ASYNC(self, updatedisplay, NULL);
 	if(self->buttonflag == 0){
-		AFTER(MSEC(800), self, inc, NULL);
+		self->buttonflag = 1;
+		AFTER(MSEC(500), self, inc, NULL);
 	}
 }
 
@@ -141,32 +134,35 @@ void firstDec(GUI *self){
 	ASYNC(self->pg[self->focus], decrease, NULL);
 	ASYNC(self, updatedisplay, NULL);
 	if(self->buttonflag == 0){
-		AFTER(MSEC(800), self, dec, NULL);
+		self->buttonflag = 1;
+		AFTER(MSEC(500), self, dec, NULL);
 	}
 }
 
 void inc(GUI *self){
-	if((((PINB >> 6) & 1) == 0) && (self->buttonflag) == 0){
+	if(((PINB >> 6) & 1) == 0){
 		ASYNC(self->pg[self->focus], increase, NULL);
 		self->buttonflag = 1;
-		AFTER(MSEC(150), self, resetbuttonflag, NULL);
+		AFTER(MSEC(150), self, inc, NULL);
+	}else{
+		self->buttonflag = 0;
 	}
 	
 	ASYNC(self, updatedisplay, NULL);
 }
 
 void dec(GUI *self){
-	if((((PINB >> 7) & 1) == 0) && (self->buttonflag) == 0){
+	if(((PINB >> 7) & 1) == 0){
 		ASYNC(self->pg[self->focus], decrease, NULL);
 		self->buttonflag = 1;
-		AFTER(MSEC(150), self, resetbuttonflag, NULL);
+		AFTER(MSEC(150), self, dec, NULL);
+	}else{
+		self->buttonflag = 0;
 	}
 	
 	ASYNC(self, updatedisplay, NULL);
 }
 
 void resetbuttonflag(GUI *self){
-
 	self->buttonflag = 0;
-	AFTER(MSEC(150), self, yoholdon, NULL);
 }

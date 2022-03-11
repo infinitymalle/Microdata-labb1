@@ -18,7 +18,6 @@ void updatedisplay(GUI *self);
 void changefocus(GUI *self, int newfocus);
 void inc(GUI *self);
 void dec(GUI *self);
-void yoholdon(GUI *self);
 void resetbuttonflag(GUI *self);
 
 void firstInc(GUI *self);

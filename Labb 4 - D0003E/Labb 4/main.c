@@ -10,8 +10,8 @@ int main(void)
 	button_Init();
 	LCD_Init();
 	
-	Writer writer[2] = {initWriter(4, 0, 0), initWriter(6, 0, 0)};
-	Pulsegen pg[2] = {initPulsegen(0, 0, writer), initPulsegen(0, 0, writer+1)};
+	Writer writer = initWriter();
+	Pulsegen pg[2] = {initPulsegen(0, 0, 4, 0, &writer), initPulsegen(0, 0, 6, 0, &writer)};
 	GUI gui = initGUI(pg, pg+1, 1, 0);		// +1 för nästa element
 	
 	Joystick joystick = initJoystick(&gui);

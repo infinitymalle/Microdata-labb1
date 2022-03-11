@@ -123,19 +123,19 @@ void changefocus(GUI *self, int newfocus){
 
 void firstInc(GUI *self){
 	ASYNC(self->pg[self->focus], increase, NULL);
-	ASYNC(self, updatedisplay, NULL);
+	updatedisplay(self);
 	if(self->buttonflag == 0){
 		self->buttonflag = 1;
-		AFTER(MSEC(500), self, inc, NULL);
+		AFTER(MSEC(400), self, inc, NULL);
 	}
 }
 
 void firstDec(GUI *self){
 	ASYNC(self->pg[self->focus], decrease, NULL);
-	ASYNC(self, updatedisplay, NULL);
+	updatedisplay(self);
 	if(self->buttonflag == 0){
 		self->buttonflag = 1;
-		AFTER(MSEC(500), self, dec, NULL);
+		AFTER(MSEC(400), self, dec, NULL);
 	}
 }
 
@@ -160,7 +160,7 @@ void dec(GUI *self){
 		self->buttonflag = 0;
 	}
 	
-	ASYNC(self, updatedisplay, NULL);
+	updatedisplay(self);
 }
 
 void resetbuttonflag(GUI *self){

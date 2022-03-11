@@ -8,9 +8,14 @@
 
 typedef struct {
 	Object super;
+	int carsOnBridge;
+	int queueLeft;
+	int queueRight;
+	int leftLight;
+	int rightLight;
 	
 } Bridge;
 
-
+void changeDirection(Bridge *self);
 
 #endif

@@ -35,9 +35,9 @@ void LCD_Init(void)
 		LCDAB = Low Power Waveform
 	*/
 	LCDCRA = (1 << LCDEN) | (1 << LCDAB) | LCDCRA;
-		printAt(0, 0);
-		printAt(0, 2);
-		printAt(0, 4);
+	printAt(0, 0);
+	printAt(0, 2);
+	printAt(0, 4);
 }
 
 void printAt(long num, int pos) {
@@ -82,4 +82,22 @@ void writeChar(char ch, int pos){
 			}
 		}
 	}
+}
+
+
+#define FOCS 8000000
+#define BAUD 9600
+#define MYUBRR (FOCS/16/BAUD-1)
+
+void USART_Init(unsigned int ubrr){
+	UBRR0H = (unsigned char) (ubrr>>8);
+	UBRR0L = (unsigned char) ubrr;
+	
+	UCSR0B = (1 << TXEN0) | (1 << RXCIE0) | (1 << RXEN0);
+	UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); 
+	
+}
+
+void updatedisplay(GUI *self){
+	
 }

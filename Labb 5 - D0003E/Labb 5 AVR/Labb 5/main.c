@@ -11,6 +11,9 @@
 int main(void){
 	//void LCD_Init(void)
 	
+	USART_Init();
+	
+	INSTALL();
 	
 	TINYTIMBER();
 }

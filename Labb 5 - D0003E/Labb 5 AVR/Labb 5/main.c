@@ -6,15 +6,19 @@
  */ 
 
 #include <avr/io.h>
-
+#include "Inputs.h"
 
 int main(void){
-	//void LCD_Init(void)
+	CLKPR = 0x80;
+	CLKPR = 0x00;
 	
-	USART_Init();
+	GUI gui = initGUI();
+	Bridge bridge = initBridge(0, 0, 0, 0, 0, 0, &gui);
+	Inputs input = initInputs(&bridge);
 	
-	INSTALL();
+	INSTALL(&input, newcar, IRQ_USART0_RX);
 	
-	TINYTIMBER();
+	return TINYTIMBER(&gui, LCD_Init, NULL);
 }
+
 

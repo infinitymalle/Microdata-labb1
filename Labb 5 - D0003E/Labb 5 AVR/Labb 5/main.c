@@ -13,6 +13,7 @@ int main(void){
 	CLKPR = 0x00;
 	
 	GUI gui = initGUI();
+	Outputs outputs = initOutputs();
 	Bridge bridge = initBridge(0, 0, 0, 0, 0, 0, &gui);
 	Inputs input = initInputs(&bridge);
 	

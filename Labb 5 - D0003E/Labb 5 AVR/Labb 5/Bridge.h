@@ -4,7 +4,7 @@
 #include <avr/io.h>
 #include "GUI.h"
 
-#define initBridge(carsOnBridge, queueSouth, queueNorth, southLight, northLight, carspassde, gui) {initObject(),carsOnBridge, queueSouth, queueNorth, southLight, northLight, carspassde, gui}
+#define initBridge(carsOnBridge, queueSouth, queueNorth, southLight, northLight, carspassde, gui, outputs) {initObject(),carsOnBridge, queueSouth, queueNorth, southLight, northLight, carspassde, gui, outputs}
 
 typedef struct {
 	Object super;
@@ -13,8 +13,9 @@ typedef struct {
 	int queueNorth;
 	int southLight;
 	int northLight;
-	int carspassde;
+	int carspassed;
 	GUI *gui;
+	Outputs *outputs;
 } Bridge;
 
 void addcar(Bridge *self, int fromDirection);

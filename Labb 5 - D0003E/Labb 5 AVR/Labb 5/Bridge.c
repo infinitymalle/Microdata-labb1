@@ -5,11 +5,14 @@
 #include <stdbool.h>
 
 void addcar(Bridge *self, int fromDirection){
-	if (fromDirection == 0x73){
+	if (fromDirection == 0b0100){
 		self->queueSouth++;
 	}
-	else if(fromDirection == 0x6E){
+	else if(fromDirection == 0b0001){
 		self->queueNorth++;
+	}
+	else if(fromDirection == (0b1000 || 0b0010)){
+		carRun(self);
 	}
 }
 
@@ -26,22 +29,22 @@ void changeDirection(Bridge *self){
 void carRun(Bridge *self){
 	if((self->southLight == 1) && (self->queueSouth > 0)){			//left
 		self->queueSouth--;
-		AFTER(MSEC(1000), self, carRun, NULL);
 		self->carsOnBridge++;
+		AFTER(MSEC(1000), self, carRun, NULL);
 		AFTER(MSEC(5000), self, carLeave, NULL);
-		self->carspassde++;
-		if(self->carspassde >= 20){
-			self->carspassde = 20;
+		self->carspassed++;
+		if(self->carspassed >= 10){
+			self->carspassed = 0;
 			changeDirection(self);
 		}
 	}else if((self->northLight == 1) && (self->queueNorth > 0)){	//right
 		self->queueNorth--;
-		AFTER(MSEC(1000), self, carRun, NULL);
 		self->carsOnBridge++;
+		AFTER(MSEC(1000), self, carRun, NULL);
 		AFTER(MSEC(5000), self, carLeave, NULL);
-		self->carspassde++;
-		if(self->carspassde >= 20){
-			self->carspassde = 20;
+		self->carspassed++;
+		if(self->carspassed >= 10){
+			self->carspassed = 0;
 			changeDirection(self);
 		}
 	}
@@ -67,6 +70,7 @@ void changeNorth(Bridge *self){
 void updateDisp(Bridge *self){
 	ASYNC(self->gui, setleft, self->queueSouth);
 	ASYNC(self->gui, setmiddle, self->carsOnBridge);
-	ASYNC(self->gui,setright, self->queueNorth);
+	ASYNC(self->gui, setright, self->queueNorth);
+	ASYNC(self->outputs, transmit, self->northLight);
 	//ASYNC(self->gui, updatedisplay, NULL);
 };

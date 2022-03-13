@@ -19,7 +19,7 @@ void USART_Init(unsigned int ubrr){
 
 void newcar(Inputs *self){
 	while( ! (UCSR0A & (1 << RXC0)));
-	if((UDR0 == southcar) || (UDR0 == northcar)){
+	if((UDR0 == southcar) || (UDR0 == northcar) || (UDR0 == southDrive) || (UDR0 == northDrive)){
 		int putin = UDR0;
 		ASYNC(self->bridge, addcar, putin);
 	}

@@ -163,6 +163,14 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Outputs.c">
+      <SubType>compile</SubType>
+      <Link>Outputs.c</Link>
+    </Compile>
+    <Compile Include="Outputs.h">
+      <SubType>compile</SubType>
+      <Link>Outputs.h</Link>
+    </Compile>
     <Compile Include="TinyTimber.c">
       <SubType>compile</SubType>
       <Link>TinyTimber.c</Link>

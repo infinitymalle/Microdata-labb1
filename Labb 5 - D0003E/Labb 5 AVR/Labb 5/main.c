@@ -9,9 +9,6 @@
 #include "Inputs.h"
 
 
-#define FOCS 8000000
-#define BAUD 9600
-#define MYUBRR (FOCS/16/BAUD-1)
 
 int main(void){
 	CLKPR = 0x80;
@@ -21,7 +18,7 @@ int main(void){
 	Outputs outputs = initOutputs(0);
 	Bridge bridge = initBridge(0, 0, 0, 0, 0, 0, &gui, &outputs);
 	Inputs input = initInputs(&bridge);
-	USART_Init(MYUBRR);
+	
 	
 	INSTALL(&input, newcar, IRQ_USART0_RX);
 	

@@ -13,9 +13,3 @@ void transmit(Outputs *self, int lightStatus){
 	while (!(UCSR0A & (1 << UDRE0)));
 	UDR0 = self->data;
 }
-
-
-
-//röd röd kön > andra kön 
-//röd grön // kön > 0 && (tillräckligt många bilar inte passerat ännu || andra kön är tom)
-//grön röd

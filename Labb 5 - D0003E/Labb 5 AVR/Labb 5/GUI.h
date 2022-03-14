@@ -14,6 +14,7 @@ typedef struct {
 } GUI;
 
 void LCD_Init(void);
+void USART_Init();
 void printAt(long num, int pos);
 void writeChar(char ch, int pos);
 void updatedisplay(GUI *self);

@@ -1,18 +1,19 @@
-#include "Bridge.h"
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdbool.h>
+#include "Bridge.h"
+
 
 void addcar(Bridge *self, int sensor){
-	if (sensor == 0b0100){
+	if (sensor == 0x4){
 		self->queueSouth++;
 	}
-	else if(sensor == 0b0001){
+	else if(sensor == 0x1){
 		self->queueNorth++;
 	}
-	else if(sensor == (0b1000 || 0b0010)){
+	else if(sensor == (0x8 || 0x2)){
 		carRun(self);
+		LCDDR8 = 1;
 	}
 }
 

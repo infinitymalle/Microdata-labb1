@@ -4,25 +4,29 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 
-void addcar(Bridge *self, int fromDirection){
-	if (fromDirection == 0b0100){
+void addcar(Bridge *self, int sensor){
+	if (sensor == 0b0100){
 		self->queueSouth++;
 	}
-	else if(fromDirection == 0b0001){
+	else if(sensor == 0b0001){
 		self->queueNorth++;
 	}
-	else if(fromDirection == (0b1000 || 0b0010)){
+	else if(sensor == (0b1000 || 0b0010)){
 		carRun(self);
 	}
 }
 
 void changeDirection(Bridge *self){
-	if (self->southLight){
+	if((self->queueNorth == 0) && (self->queueSouth == 0)){
+		ASYNC(self->outputs, transmit, 2);
+	}else if (self->southLight){
 		self->southLight = 0;
 		AFTER(MSEC(5000), self, changeNorth, NULL);
+		ASYNC(self->outputs, transmit, 0);
 	}else if (self->northLight){
 		self->northLight = 0;
 		AFTER(MSEC(5000), self, changeSouth, NULL);
+		ASYNC(self->outputs, transmit, 1);
 	}
 }
 
@@ -30,20 +34,16 @@ void carRun(Bridge *self){
 	if((self->southLight == 1) && (self->queueSouth > 0)){			//left
 		self->queueSouth--;
 		self->carsOnBridge++;
-		AFTER(MSEC(1000), self, carRun, NULL);
 		AFTER(MSEC(5000), self, carLeave, NULL);
-		self->carspassed++;
-		if(self->carspassed >= 10){
+		if((self->carspassed >= 5) && (self->queueNorth > 0)){ // 5 bilar + 5 sekunder(5 bilar till) blir 10 bilar
 			self->carspassed = 0;
 			changeDirection(self);
 		}
 	}else if((self->northLight == 1) && (self->queueNorth > 0)){	//right
 		self->queueNorth--;
 		self->carsOnBridge++;
-		AFTER(MSEC(1000), self, carRun, NULL);
 		AFTER(MSEC(5000), self, carLeave, NULL);
-		self->carspassed++;
-		if(self->carspassed >= 10){
+		if((self->carspassed >= 5) && (self->queueSouth > 0)) { // 5 bilar + 5 sekunder(5 bilar till) blir 10 bilar
 			self->carspassed = 0;
 			changeDirection(self);
 		}
@@ -54,23 +54,20 @@ void carRun(Bridge *self){
 void carLeave(Bridge *self){
 	if(self->carsOnBridge > 0){
 		self->carsOnBridge--;
+		self->carspassed++;
 	}
 }
 
 void changeSouth(Bridge *self){
 	self->southLight = 1;
-	carRun(self);
 }
 
 void changeNorth(Bridge *self){
 	self->northLight = 1;
-	carRun(self);
 }
 
 void updateDisp(Bridge *self){
 	ASYNC(self->gui, setleft, self->queueSouth);
 	ASYNC(self->gui, setmiddle, self->carsOnBridge);
 	ASYNC(self->gui, setright, self->queueNorth);
-	ASYNC(self->outputs, transmit, self->northLight);
-	//ASYNC(self->gui, updatedisplay, NULL);
 };

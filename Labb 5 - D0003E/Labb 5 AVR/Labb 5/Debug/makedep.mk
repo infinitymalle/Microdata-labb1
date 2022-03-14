@@ -10,5 +10,7 @@ Inputs.c
 
 main.c
 
+Outputs.c
+
 TinyTimber.c
 

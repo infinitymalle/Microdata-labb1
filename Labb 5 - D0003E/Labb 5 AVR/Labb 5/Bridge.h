@@ -3,6 +3,7 @@
 
 #include <avr/io.h>
 #include "GUI.h"
+#include "Outputs.h"
 
 #define initBridge(carsOnBridge, queueSouth, queueNorth, southLight, northLight, carspassde, gui, outputs) {initObject(),carsOnBridge, queueSouth, queueNorth, southLight, northLight, carspassde, gui, outputs}
 

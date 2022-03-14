@@ -4,10 +4,6 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 
-#define FOCS 8000000
-#define BAUD 9600
-#define MYUBRR (FOCS/16/BAUD-1)
-
 void USART_Init(unsigned int ubrr){
 	UBRR0H = (unsigned char) (ubrr>>8);
 	UBRR0L = (unsigned char) ubrr;
@@ -20,10 +16,7 @@ void USART_Init(unsigned int ubrr){
 void newcar(Inputs *self){
 	while( ! (UCSR0A & (1 << RXC0)));
 	if((UDR0 == southcar) || (UDR0 == northcar) || (UDR0 == southDrive) || (UDR0 == northDrive)){
-		int putin = UDR0;
+		int putin = UDR0;	
 		ASYNC(self->bridge, addcar, putin);
-	}
-	else if(UDR0 == exit){
-		while(1){}
 	}
 }

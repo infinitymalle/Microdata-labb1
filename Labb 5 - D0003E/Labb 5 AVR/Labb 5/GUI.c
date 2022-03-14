@@ -98,11 +98,3 @@ void setright(GUI *self, int val){
 	//self->rightDisp = val;
 	printAt(val, 4);
 }
-
-
-
-//void updatedisplay(GUI *self){
-	//printAt(self->leftDisp, 0);
-	//printAt(self->middleDisp, 2);
-	//printAt(self->rightDisp, 4);
-//}

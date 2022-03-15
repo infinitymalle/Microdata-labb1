@@ -13,7 +13,7 @@ typedef struct {
 	//int rightDisp;
 } GUI;
 
-void LCD_Init(void);
+void general_Init(void);
 void USART_Init();
 void printAt(long num, int pos);
 void writeChar(char ch, int pos);

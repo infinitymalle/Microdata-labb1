@@ -16,13 +16,13 @@ int main(void){
 	
 	GUI gui = initGUI();
 	Outputs outputs = initOutputs(0);
-	Bridge bridge = initBridge(0, 0, 0, 0, 0, 0, &gui, &outputs);
+	Bridge bridge = initBridge(0, 0, 0, 0, 1, 0, &gui, &outputs);
 	Inputs input = initInputs(&bridge);
 	
 	
 	INSTALL(&input, newcar, IRQ_USART0_RX);
 	
-	return TINYTIMBER(&gui, LCD_Init, NULL);
+	return TINYTIMBER(&gui, general_Init, NULL);
 }
 
 

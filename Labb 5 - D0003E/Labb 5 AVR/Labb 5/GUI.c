@@ -4,7 +4,7 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 
-void LCD_Init(void)
+void general_Init(void)
 {
 	/*
 		LCD Control and Status Register:

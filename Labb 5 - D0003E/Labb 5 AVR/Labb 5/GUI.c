@@ -35,6 +35,8 @@ void general_Init(void)
 		LCDAB = Low Power Waveform
 	*/
 	LCDCRA = (1 << LCDEN) | (1 << LCDAB) | LCDCRA;
+	
+	LCDDR8 = 1;
 	printAt(0, 0);
 	printAt(0, 2);
 	printAt(0, 4);

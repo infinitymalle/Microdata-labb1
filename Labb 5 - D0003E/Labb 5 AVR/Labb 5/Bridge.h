@@ -19,8 +19,9 @@ typedef struct {
 	Outputs *outputs;
 } Bridge;
 
-void addcar(Bridge *self, int fromDirection);
+void addcar(Bridge *self, int sensor);
 void changeDirection(Bridge *self);
+void stop(Bridge *self);
 void carRun(Bridge *self);
 void carLeave(Bridge *self);
 void changeSouth(Bridge *self);

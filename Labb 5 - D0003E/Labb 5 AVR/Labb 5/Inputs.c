@@ -21,8 +21,5 @@ void newcar(Inputs *self){
 		ASYNC(self->bridge, carRun, NULL);
 	}else if(putin & bit2){
 		ASYNC(self->bridge, addcar, bit2);
-	}else{
-		ASYNC(self->bridge, carRun, NULL);
 	}
-	ASYNC(self->bridge, carRun, NULL);
 }

@@ -16,7 +16,7 @@ int main(void){
 	
 	GUI gui = initGUI();
 	Outputs outputs = initOutputs(0);
-	Bridge bridge = initBridge(0, 0, 0, 0, 1, 0, &gui, &outputs);
+	Bridge bridge = initBridge(0, 0, 0, 0, 0, 0, &gui, &outputs);
 	Inputs input = initInputs(&bridge);
 	
 	

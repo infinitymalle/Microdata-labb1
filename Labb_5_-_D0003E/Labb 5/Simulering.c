@@ -114,7 +114,6 @@ void input(void) {
 				southCars++;
 			}
 		}
-		
 	}
 }
 

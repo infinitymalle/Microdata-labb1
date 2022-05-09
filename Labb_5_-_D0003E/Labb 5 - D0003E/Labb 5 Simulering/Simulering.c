@@ -58,9 +58,10 @@ void *keyinput(text){               //från tangentbordet
         char carInput = getchar();
         if(carInput == "n"){
             northQueue++;
-
+            transmit(0x1);
         }elseif(charInput == "s"){
             southQueue++;
+            transmit(0x4);
         }elseif(charInput == "e"){
             break;
         }
@@ -98,8 +99,9 @@ void *bridge(){             // to avr
         }
         if(southLight == 1){
             southQueue--;
-            transmit(0x4);
+            transmit(0x8);
         }
+        sleep(1);
     }
 }
 

@@ -6,9 +6,11 @@
 int COM_1;
 int carsOnBridge = 0;
 int northQueue = 0;
-int northLight = 0;
+int northLight = 0; //1 grön 0 röd
 int southQueue = 0;
-int southLight = 0;
+int southLight = 0; //1 grön 0 röd
+
+pthread_mutex_t inputOutputmutex;   // Atomiska?
 
 
 void startsimulation(); 
@@ -17,11 +19,12 @@ void transmit(message);
 
 
 int main(void){
-
+    pthread_mutex_init()
+    pthread_mutex_init()
 
 }
 
-void read(){
+void read(){                // från avr
     COM_1 = open("/dev/ttyS0", O_RDWR);
 
     strukt termios serialconfig;
@@ -29,12 +32,42 @@ void read(){
     serialconfig.c_cflag = B9600 | CLOCAL; // CS8 is allready set
     serialconfig.c_lflag =~ (ICANON | ECHO | ECHOK); // Toggle off
 
+    //Sätter hur ofta signalenrna får ändras
+    cfsetospeed(&serialconfig, B9600);
+    cfsetispeed(&serialconfig, B9600);
+    int data = 0;
+    while(true){
+        data = 0;
+        read(serialconfig, &data, ); //(strukt, variabel, meep) läser indata till variabeln
 
+        if(data == 0x6){        // 0110 North green south red
+            northLight = 1;
+            southLight = 0;
+        }else if(data == 0x9){  // 1001 North red south green
+            northLight = 0;
+            southLight = 1;
+        }else if(data == 0xA){  // 1010 both red
+            northLight = 0;
+            southLight = 0;
+        }
+    }
 }
 
-void write(text){
+void *keyinput(text){               //från tangentbordet
+    while(true){
+        char carInput = getchar();
+        if(carInput == "n"){
+            northQueue++;
 
+        }elseif(charInput == "s"){
+            southQueue++;
+        }elseif(charInput == "e"){
+            break;
+        }
+    }
+    printf("Terminerad");
 }
+
 
 void *gui(){
     system("clear");
@@ -57,7 +90,7 @@ void *gui(){
     printf("South light \033[37m");
 }
 
-void *bridge(){
+void *bridge(){             // to avr
     while(true){
         if(northLight == 1){
             northQueue--;
@@ -68,4 +101,8 @@ void *bridge(){
             transmit(0x4);
         }
     }
+}
+
+void transmit(int message){
+    
 }

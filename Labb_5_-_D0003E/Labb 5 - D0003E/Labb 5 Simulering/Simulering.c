@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <termios.h>
 #include <pthread.h>
-
+/*
+*   Author:
+*   Malkolm Lundkvist
+*   Eddie Höglund
+*/
 
 int COM_1;
 int carsOnBridge = 0;
@@ -12,19 +16,27 @@ int southLight = 0; //1 grön 0 röd
 
 pthread_mutex_t inputOutputmutex;   // Atomiska?
 
-
-void startsimulation(); 
-void gui(*state); 
+void fromAVR(void);
+void *keyinput(void);
+void *gui(void);
+void *bridge(void);
 void transmit(message);
 
 
 int main(void){
+    pthread_t t_keyinput, t_gui, t_bridge;
+
+    pthread_create(&t_keyinput, null, &keyinput, null);
+    pthread_create(&t_gui, null, &gui, null);
+    pthread_create(&t_bridge, null, &bridge, null);
+
     pthread_mutex_init()
     pthread_mutex_init()
 
+    fromAVR();
 }
 
-void read(){                // från avr
+void fromAVR(void){                // från avr
     COM_1 = open("/dev/ttyS0", O_RDWR);
 
     strukt termios serialconfig;
@@ -53,7 +65,7 @@ void read(){                // från avr
     }
 }
 
-void *keyinput(text){               //från tangentbordet
+void *keyinput(void){               //från tangentbordet
     while(true){
         char carInput = getchar();
         if(carInput == "n"){
@@ -70,7 +82,7 @@ void *keyinput(text){               //från tangentbordet
 }
 
 
-void *gui(){
+void *gui(void){
     system("clear");
     printf("Cars on bridge: %d", carsOnBridge);
     printf("North queue: %d", northQueue);
@@ -91,12 +103,15 @@ void *gui(){
     printf("South light \033[37m");
 }
 
-void *bridge(){             // to avr
+void *bridge(void){             // to avr
+    //int onbridge = 0; // om inte avr fixar det själv kan vi iplemetera en onbridge
     while(true){
         if(northLight == 1){
             northQueue--;
             transmit(0x2);
+
         }
+
         if(southLight == 1){
             southQueue--;
             transmit(0x8);
@@ -106,5 +121,5 @@ void *bridge(){             // to avr
 }
 
 void transmit(int message){
-    
+    int meep = write(COM_1, message, sizeof(message));
 }

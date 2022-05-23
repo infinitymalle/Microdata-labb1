@@ -103,15 +103,12 @@ void writeChar(char ch, int pos){
 }
 
 
-void setleft(GUI *self, int val){
-	//self->leftDisp = val;
+void setleft(GUI *self, int val){  //South
 	printAt(val, 0);
 }
-void setmiddle(GUI *self, int val){
-	//self->middleDisp = val;
+void setmiddle(GUI *self, int val){ //Cars on bridge
 	printAt(val, 2);
 }
-void setright(GUI *self, int val){
-	//self->rightDisp = val;
+void setright(GUI *self, int val){ //North
 	printAt(val, 4);
 }

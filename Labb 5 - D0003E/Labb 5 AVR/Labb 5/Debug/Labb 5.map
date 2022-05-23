@@ -692,20 +692,20 @@ END GROUP
  .debug_frame   0x0000029c       0x24 Outputs.o
  .debug_frame   0x000002c0      0x97c TinyTimber.o
 
-.debug_str      0x00000000      0x949
+.debug_str      0x00000000      0x982
  *(.debug_str)
  .debug_str     0x00000000      0x2b3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega169p/avr5/crtatmega169p.o
  .debug_str     0x000002b3      0x209 Bridge.o
                                 0x244 (size before relaxing)
- .debug_str     0x000004bc       0x7c GUI.o
+ .debug_str     0x000004bc       0xb5 GUI.o
                                 0x1fc (size before relaxing)
- .debug_str     0x00000538       0x29 Inputs.o
+ .debug_str     0x00000571       0x29 Inputs.o
                                 0x227 (size before relaxing)
- .debug_str     0x00000561      0x12a main.o
+ .debug_str     0x0000059a      0x12a main.o
                                 0x326 (size before relaxing)
- .debug_str     0x0000068b       0x24 Outputs.o
+ .debug_str     0x000006c4       0x24 Outputs.o
                                 0x1b4 (size before relaxing)
- .debug_str     0x000006af      0x29a TinyTimber.o
+ .debug_str     0x000006e8      0x29a TinyTimber.o
                                 0x561 (size before relaxing)
 
 .debug_loc      0x00000000     0x2ffd
